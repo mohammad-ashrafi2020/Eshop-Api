@@ -5,15 +5,19 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shop", "Shop", "{4F1195F5-E9BB-469D-9DE7-3B3249729B13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Domain", "Shop\Shop.Domain\Shop.Domain.csproj", "{5DCC544B-FC8B-40BE-9749-0C0DF58632ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Domain", "Shop\Shop.Domain\Shop.Domain.csproj", "{5DCC544B-FC8B-40BE-9749-0C0DF58632ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Application", "Shop\Shop.Application\Shop.Application.csproj", "{6E5D8F7D-E0E7-4C68-AD3F-ED0BD6CDA4AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Application", "Shop\Shop.Application\Shop.Application.csproj", "{6E5D8F7D-E0E7-4C68-AD3F-ED0BD6CDA4AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Infrastructure", "Shop\Shop.Infrastructure\Shop.Infrastructure.csproj", "{B84F369D-1A1E-444F-B124-9B58070DCD93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Infrastructure", "Shop\Shop.Infrastructure\Shop.Infrastructure.csproj", "{B84F369D-1A1E-444F-B124-9B58070DCD93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Query", "Shop\Shop.Query\Shop.Query.csproj", "{125D8FC0-2650-4E45-8F6D-6EB9FB9FF46F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Query", "Shop\Shop.Query\Shop.Query.csproj", "{125D8FC0-2650-4E45-8F6D-6EB9FB9FF46F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Presentation.Facade", "Shop\Shop.Presentation.Facade\Shop.Presentation.Facade.csproj", "{92FFBC90-CCB7-42CD-B296-39346825E07D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Presentation.Facade", "Shop\Shop.Presentation.Facade\Shop.Presentation.Facade.csproj", "{92FFBC90-CCB7-42CD-B296-39346825E07D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{49310E17-C935-4A59-86BC-3E42951B4843}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Domain", "Common\Common.Domain\Common.Domain.csproj", "{44C780A3-0903-41E6-9DFE-5E0B4343ECAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +45,10 @@ Global
 		{92FFBC90-CCB7-42CD-B296-39346825E07D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92FFBC90-CCB7-42CD-B296-39346825E07D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92FFBC90-CCB7-42CD-B296-39346825E07D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44C780A3-0903-41E6-9DFE-5E0B4343ECAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44C780A3-0903-41E6-9DFE-5E0B4343ECAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44C780A3-0903-41E6-9DFE-5E0B4343ECAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44C780A3-0903-41E6-9DFE-5E0B4343ECAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +59,7 @@ Global
 		{B84F369D-1A1E-444F-B124-9B58070DCD93} = {4F1195F5-E9BB-469D-9DE7-3B3249729B13}
 		{125D8FC0-2650-4E45-8F6D-6EB9FB9FF46F} = {4F1195F5-E9BB-469D-9DE7-3B3249729B13}
 		{92FFBC90-CCB7-42CD-B296-39346825E07D} = {4F1195F5-E9BB-469D-9DE7-3B3249729B13}
+		{44C780A3-0903-41E6-9DFE-5E0B4343ECAA} = {49310E17-C935-4A59-86BC-3E42951B4843}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CECE38C3-1420-41DC-83EC-AF0EA47980C9}
