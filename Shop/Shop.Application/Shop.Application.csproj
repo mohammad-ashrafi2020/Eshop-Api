@@ -6,4 +6,39 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Categories\Create\" />
+    <Folder Include="Categories\Edit\" />
+    <Folder Include="Categories\AddChild\" />
+    <Folder Include="Comments\Create\" />
+    <Folder Include="Comments\Edit\" />
+    <Folder Include="Comments\ChangeStatus\" />
+    <Folder Include="Orders\AddItem\" />
+    <Folder Include="Orders\ChangeCount\" />
+    <Folder Include="Orders\RemoveItem\" />
+    <Folder Include="Products\Create\" />
+    <Folder Include="Products\Edit\" />
+    <Folder Include="Products\AddImage\" />
+    <Folder Include="Products\RemoveImage\" />
+    <Folder Include="Roles\Create\" />
+    <Folder Include="Roles\Edit\" />
+    <Folder Include="Sellers\Create\" />
+    <Folder Include="Sellers\Edit\" />
+    <Folder Include="Sellers\ChangeStatus\" />
+    <Folder Include="Sellers\AddInventory\" />
+    <Folder Include="Sellers\EditInventory\" />
+    <Folder Include="Sellers\DeleteInventory\" />
+    <Folder Include="SiteEntities\Banner\Create\" />
+    <Folder Include="SiteEntities\Banner\Edit\" />
+    <Folder Include="SiteEntities\Slider\Create\" />
+    <Folder Include="SiteEntities\Slider\Edit\" />
+    <Folder Include="Users\Create\" />
+    <Folder Include="Users\Edit\" />
+    <Folder Include="Users\AddAddress\" />
+    <Folder Include="Users\DeleteAddress\" />
+    <Folder Include="Users\EditAddress\" />
+    <Folder Include="Users\ChargeWallet\" />
+    <Folder Include="Users\Register\" />
+  </ItemGroup>
+
 </Project>
