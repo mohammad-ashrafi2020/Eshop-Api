@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Common.Application
+namespace Common.Domain.Utils
 {
     public static class TextHelper
     {
