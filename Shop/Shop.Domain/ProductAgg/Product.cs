@@ -1,6 +1,6 @@
-﻿using Common.Application;
-using Common.Domain;
+﻿using Common.Domain;
 using Common.Domain.Exceptions;
+using Common.Domain.Utils;
 using Common.Domain.ValueObjects;
 using Shop.Domain.ProductAgg.Services;
 using System;
