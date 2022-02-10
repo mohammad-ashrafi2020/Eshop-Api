@@ -49,11 +49,21 @@ namespace Shop.Domain.OrderAgg
 
         public void AddItem(OrderItem item)
         {
+            ChangeOrderGuard();
+
+            var oldItem = Items.FirstOrDefault(f => f.InventoryId == item.InventoryId);
+            if (oldItem != null)
+            {
+                oldItem.ChangeCount(item.Count + oldItem.Count);
+                return;
+            }
             Items.Add(item);
         }
 
         public void RemoveItem(long itemId)
         {
+            ChangeOrderGuard();
+
             var currentItem = Items.FirstOrDefault(f => f.Id == itemId);
             if (currentItem != null)
                 Items.Remove(currentItem);
@@ -61,6 +71,8 @@ namespace Shop.Domain.OrderAgg
 
         public void ChangeCountItem(long itemId, int newCount)
         {
+            ChangeOrderGuard();
+
             var currentItem = Items.FirstOrDefault(f => f.Id == itemId);
             if (currentItem == null)
                 throw new NullOrEmptyDomainDataException();
@@ -76,7 +88,15 @@ namespace Shop.Domain.OrderAgg
 
         public void Checkout(OrderAddress orderAddress)
         {
+            ChangeOrderGuard();
+
             Address = orderAddress;
+        }
+
+        public void ChangeOrderGuard()
+        {
+            if (Status != OrderStatus.Pennding)
+                throw new InvalidDomainDataException("امکان ثبت محصول در این سفارش وجود ندارد");
         }
     }
 }
