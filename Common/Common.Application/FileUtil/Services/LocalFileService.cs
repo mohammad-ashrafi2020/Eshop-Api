@@ -60,7 +60,6 @@ namespace Common.Application.FileUtil.Services
                                           .Replace(":", "")
                                           .Replace(".", "") + Path.GetExtension(fileName);
 
-
             var folderName = Path.Combine(Directory.GetCurrentDirectory(), directoryPath.Replace("/", "\\"));
             if (!Directory.Exists(folderName))
                 Directory.CreateDirectory(folderName);
@@ -69,7 +68,6 @@ namespace Common.Application.FileUtil.Services
 
             using var stream = new FileStream(path, FileMode.Create);
             await file.CopyToAsync(stream);
-
             return fileName;
         }
     }
