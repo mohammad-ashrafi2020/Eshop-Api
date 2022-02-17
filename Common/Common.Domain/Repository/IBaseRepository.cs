@@ -11,7 +11,8 @@ namespace Common.Domain.Repository
 
         Task<T> GetTracking(long id);
 
-        Task Add(T entity);
+        Task AddAsync(T entity);
+        void Add(T entity);
 
         Task AddRange(ICollection<T> entities);
 

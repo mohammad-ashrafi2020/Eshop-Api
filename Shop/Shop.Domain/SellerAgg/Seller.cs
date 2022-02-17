@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shop.Domain.SellerAgg.Services;
 
 namespace Shop.Domain.SellerAgg
 {
@@ -21,14 +22,17 @@ namespace Shop.Domain.SellerAgg
         {
         }
 
-        public Seller(long userId, string shopName, string nationalCode)
+        public Seller(long userId, string shopName, string nationalCode, ISellerDomainService domainService)
         {
             Guard(shopName, nationalCode);
-
             UserId = userId;
             ShopName = shopName;
             NationalCode = nationalCode;
             Inventories = new List<SellerInventory>();
+
+            if (domainService.IsValidSellerInformation(this) == false)
+                throw new InvalidDomainDataException("اطلاعات نامعتبر است");
+
         }
 
         public void ChangeStatus(SellerStatus status)
@@ -37,9 +41,13 @@ namespace Shop.Domain.SellerAgg
             LastUpdate = DateTime.Now;
         }
 
-        public void Edit(string shopName, string nationalCode)
+        public void Edit(string shopName, string nationalCode, ISellerDomainService domainService)
         {
             Guard(shopName, nationalCode);
+            if(nationalCode!=NationalCode)
+                if (domainService.NationalCodeExistInDataBase(nationalCode))
+                    throw new InvalidDomainDataException("کدملی متعلق به شخص دیگری است");
+
             ShopName = shopName;
             NationalCode = nationalCode;
         }
