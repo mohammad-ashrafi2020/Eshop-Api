@@ -7,14 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Sellers\ChangeStatus\**" />
+    <Compile Remove="Sellers\DeleteInventory\**" />
+    <EmbeddedResource Remove="Sellers\ChangeStatus\**" />
+    <EmbeddedResource Remove="Sellers\DeleteInventory\**" />
+    <None Remove="Sellers\ChangeStatus\**" />
+    <None Remove="Sellers\DeleteInventory\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Roles\Create\" />
     <Folder Include="Roles\Edit\" />
     <Folder Include="Sellers\Create\" />
     <Folder Include="Sellers\Edit\" />
-    <Folder Include="Sellers\ChangeStatus\" />
     <Folder Include="Sellers\AddInventory\" />
     <Folder Include="Sellers\EditInventory\" />
-    <Folder Include="Sellers\DeleteInventory\" />
     <Folder Include="SiteEntities\Banner\Create\" />
     <Folder Include="SiteEntities\Banner\Edit\" />
     <Folder Include="SiteEntities\Slider\Create\" />
