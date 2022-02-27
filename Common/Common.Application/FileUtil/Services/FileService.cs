@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Common.Application.FileUtil.Services
 {
-    public class LocalFileService : ILocalFileService
+    public class FileService : IFileService
     {
         public void DeleteDirectory(string directoryPath)
         {

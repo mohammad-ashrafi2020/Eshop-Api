@@ -9,8 +9,8 @@ namespace Shop.Application.SiteEntities.Banners.Create;
 public class CreateBannerCommandHandler : IBaseCommandHandler<CreateBannerCommand>
 {
     private readonly IBannerRepository _repository;
-    private readonly ILocalFileService _fileService;
-    public CreateBannerCommandHandler(IBannerRepository repository, ILocalFileService fileService)
+    private readonly IFileService _fileService;
+    public CreateBannerCommandHandler(IBannerRepository repository, IFileService fileService)
     {
         _repository = repository;
         _fileService = fileService;

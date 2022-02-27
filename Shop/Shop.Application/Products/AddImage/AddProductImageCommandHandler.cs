@@ -9,12 +9,12 @@ namespace Shop.Application.Products.AddImage
     internal class AddProductImageCommandHandler : IBaseCommandHandler<AddProductImageCommand>
     {
         private readonly IProductRepository _repository;
-        private readonly ILocalFileService _localFileService;
+        private readonly IFileService _fileService;
 
-        public AddProductImageCommandHandler(IProductRepository repository, ILocalFileService localFileService)
+        public AddProductImageCommandHandler(IProductRepository repository, IFileService fileService)
         {
             _repository = repository;
-            _localFileService = localFileService;
+            _fileService = fileService;
         }
 
         public async Task<OperationResult> Handle(AddProductImageCommand request, CancellationToken cancellationToken)
@@ -23,7 +23,7 @@ namespace Shop.Application.Products.AddImage
             if (product == null)
                 return OperationResult.NotFound();
 
-            var imageName = await _localFileService
+            var imageName = await _fileService
                 .SaveFileAndGenerateName(request.ImageFile, Directories.ProductGalleryImage);
 
             var productImage = new ProductImage(imageName, request.Sequence);

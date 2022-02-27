@@ -9,8 +9,8 @@ namespace Shop.Application.SiteEntities.Banners.Edit;
 public class EditBannerCommandHandler : IBaseCommandHandler<EditBannerCommand>
 {
     private readonly IBannerRepository _repository;
-    private readonly ILocalFileService _fileService;
-    public EditBannerCommandHandler(IBannerRepository repository, ILocalFileService fileService)
+    private readonly IFileService _fileService;
+    public EditBannerCommandHandler(IBannerRepository repository, IFileService fileService)
     {
         _repository = repository;
         _fileService = fileService;

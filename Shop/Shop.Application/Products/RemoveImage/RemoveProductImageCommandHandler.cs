@@ -8,12 +8,12 @@ namespace Shop.Application.Products.RemoveImage
     internal class RemoveProductImageCommandHandler : IBaseCommandHandler<RemoveProductImageCommand>
     {
         private readonly IProductRepository _repository;
-        private readonly ILocalFileService _localFileService;
+        private readonly IFileService _fileService;
 
-        public RemoveProductImageCommandHandler(IProductRepository repository, ILocalFileService localFileService)
+        public RemoveProductImageCommandHandler(IProductRepository repository, IFileService fileService)
         {
             _repository = repository;
-            _localFileService = localFileService;
+            _fileService = fileService;
         }
 
         public async Task<OperationResult> Handle(RemoveProductImageCommand request, CancellationToken cancellationToken)
@@ -24,7 +24,7 @@ namespace Shop.Application.Products.RemoveImage
 
             var imageName = product.RemoveImage(request.ImageId);
             await _repository.Save();
-            _localFileService.DeleteFile(Directories.ProductGalleryImage, imageName);
+            _fileService.DeleteFile(Directories.ProductGalleryImage, imageName);
             return OperationResult.Success();
         }
     }

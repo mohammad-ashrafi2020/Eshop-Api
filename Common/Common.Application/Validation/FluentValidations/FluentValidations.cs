@@ -30,6 +30,15 @@ namespace Common.Application.Validation.FluentValidations
                     context.AddFailure(errorMessage);
             });
         }
+        public static IRuleBuilderOptionsConditions<T, string> ValidPhoneNumber<T>(this IRuleBuilder<T, string> ruleBuilder, string errorMessage = ValidationMessages.InvalidPhoneNumber)
+        {
+            return ruleBuilder.Custom((phoneNumber, context) =>
+            {
+               if(string.IsNullOrWhiteSpace(phoneNumber) || phoneNumber.Length is < 11 or > 11)
+                   context.AddFailure(errorMessage);
+
+            });
+        }
 
         public static IRuleBuilderOptionsConditions<T, TProperty> JustValidFile<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder, string errorMessage = "فایل نامعتبر است") where TProperty : IFormFile
         {

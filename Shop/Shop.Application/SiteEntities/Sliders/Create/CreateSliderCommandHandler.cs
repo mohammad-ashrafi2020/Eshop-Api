@@ -8,10 +8,10 @@ namespace Shop.Application.SiteEntities.Sliders.Create;
 
 internal class CreateSliderCommandHandler : IBaseCommandHandler<CreateSliderCommand>
 {
-    private readonly ILocalFileService _fileService;
+    private readonly IFileService _fileService;
     private readonly ISliderRepository _repository;
 
-    public CreateSliderCommandHandler(ILocalFileService fileService, ISliderRepository repository)
+    public CreateSliderCommandHandler(IFileService fileService, ISliderRepository repository)
     {
         _fileService = fileService;
         _repository = repository;

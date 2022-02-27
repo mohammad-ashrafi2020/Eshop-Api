@@ -11,18 +11,18 @@ namespace Shop.Application.Products.Create
     {
         private readonly IProductDomainService _domainService;
         private readonly IProductRepository _repository;
-        private readonly ILocalFileService _localFileService;
+        private readonly IFileService _fileService;
 
-        public CreateProductCommandHandler(IProductDomainService domainService, IProductRepository repository, ILocalFileService localFileService)
+        public CreateProductCommandHandler(IProductDomainService domainService, IProductRepository repository, IFileService fileService)
         {
             _domainService = domainService;
             _repository = repository;
-            _localFileService = localFileService;
+            _fileService = fileService;
         }
 
         public async Task<OperationResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
-            var imageName = await _localFileService.SaveFileAndGenerateName(request.ImageFile, Directories.ProductImages);
+            var imageName = await _fileService.SaveFileAndGenerateName(request.ImageFile, Directories.ProductImages);
             var product = new Product(request.Title, imageName, request.Description, request.CategoryId,
                 request.SubCategoryId, request.SecondarySubCategoryId, _domainService, request.Slug,
                 request.SeoData);

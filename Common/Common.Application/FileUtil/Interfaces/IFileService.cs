@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Common.Application.FileUtil.Interfaces
 {
-    public interface ILocalFileService
+    public interface IFileService
     {
         /// <summary>
         /// Save File With Origin FileName

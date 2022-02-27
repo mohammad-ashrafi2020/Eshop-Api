@@ -12,13 +12,13 @@ namespace Shop.Application.Products.Edit
     {
         private readonly IProductDomainService _domainService;
         private readonly IProductRepository _repository;
-        private readonly ILocalFileService _localFileService;
+        private readonly IFileService _fileService;
 
-        public EditProductCommandHandler(IProductDomainService domainService, IProductRepository repository, ILocalFileService localFileService)
+        public EditProductCommandHandler(IProductDomainService domainService, IProductRepository repository, IFileService fileService)
         {
             _domainService = domainService;
             _repository = repository;
-            _localFileService = localFileService;
+            _fileService = fileService;
         }
 
         public async Task<OperationResult> Handle(EditProductCommand request, CancellationToken cancellationToken)
@@ -34,7 +34,7 @@ namespace Shop.Application.Products.Edit
 
             if (request.ImageFile != null)
             {
-                var imageName = await _localFileService
+                var imageName = await _fileService
                     .SaveFileAndGenerateName(request.ImageFile, Directories.ProductImages);
                 product.SetProductImage(imageName);
             }
@@ -53,7 +53,7 @@ namespace Shop.Application.Products.Edit
         {
             if (imageFile != null)
             {
-                _localFileService.DeleteFile(Directories.ProductImages, oldImageName);
+                _fileService.DeleteFile(Directories.ProductImages, oldImageName);
             }
         }
     }

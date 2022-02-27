@@ -8,10 +8,10 @@ namespace Shop.Application.SiteEntities.Sliders.Edit;
 
 internal class EditSliderCommandHandler : IBaseCommandHandler<EditSliderCommand>
 {
-    private readonly ILocalFileService _fileService;
+    private readonly IFileService _fileService;
     private readonly ISliderRepository _repository;
 
-    public EditSliderCommandHandler(ILocalFileService fileService, ISliderRepository repository)
+    public EditSliderCommandHandler(IFileService fileService, ISliderRepository repository)
     {
         _fileService = fileService;
         _repository = repository;
