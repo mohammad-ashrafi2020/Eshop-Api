@@ -75,14 +75,15 @@ namespace Shop.Domain.UserAgg
             Addresses.Remove(oldAddress);
         }
 
-        public void EditAddress(UserAddress address)
+        public void EditAddress(UserAddress address, long addressId)
         {
-            var oldAddress = Addresses.FirstOrDefault(f => f.Id == address.Id);
+            var oldAddress = Addresses.FirstOrDefault(f => f.Id == addressId);
             if (oldAddress == null)
                 throw new NullOrEmptyDomainDataException("Address Not found");
 
-            Addresses.Remove(oldAddress);
-            Addresses.Add(address);
+
+            oldAddress.Edit(address.Shire, address.City, address.PostalCode, address.PostalAddress, address.PhoneNumber,
+                address.Name, address.Family, address.NationalCode);
         }
 
         public void ChargeWallet(Wallet wallet)

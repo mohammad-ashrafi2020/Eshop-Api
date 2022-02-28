@@ -2,7 +2,7 @@
 {
     public class BaseEntity
     {
-        public long Id { get; private set; }
+        public long Id { get; protected set; }
         public DateTime CreationDate { get; }
 
         public BaseEntity()
