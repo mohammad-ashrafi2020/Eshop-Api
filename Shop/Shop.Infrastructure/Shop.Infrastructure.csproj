@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Persistent.Dapper\" />
     <Folder Include="_Utilities\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.123" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.2">
       <PrivateAssets>all</PrivateAssets>
