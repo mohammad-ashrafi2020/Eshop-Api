@@ -33,6 +33,8 @@ namespace Shop.Infrastructure.Persistent.Ef.UserAgg
                 .IsRequired()
                 .HasMaxLength(50);
 
+
+          
             builder.OwnsMany(b => b.Addresses, option =>
             {
                 option.HasIndex(b => b.UserId);
@@ -50,14 +52,19 @@ namespace Shop.Infrastructure.Persistent.Ef.UserAgg
                 option.Property(b => b.Family)
                     .IsRequired().HasMaxLength(50);
 
-                option.Property(b => b.PhoneNumber)
-                    .IsRequired().HasMaxLength(12);
 
                 option.Property(b => b.NationalCode)
                     .IsRequired().HasMaxLength(10);
 
                 option.Property(b => b.PostalCode)
                     .IsRequired().HasMaxLength(20);
+
+                option.OwnsOne(c => c.PhoneNumber, config =>
+                {
+                    config.Property(b => b.Value)
+                        .HasColumnName("PhoneNumber")
+                        .IsRequired().HasMaxLength(11);
+                });
             });
 
             builder.OwnsMany(b => b.Wallets, option =>

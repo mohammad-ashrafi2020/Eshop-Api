@@ -27,7 +27,7 @@ namespace Shop.Application.Products.Create
                 request.SubCategoryId, request.SecondarySubCategoryId, _domainService, request.Slug,
                 request.SeoData);
 
-            await _repository.Add(product);
+            _repository.Add(product);
 
             var specifications = new List<ProductSpecification>();
             request.Specifications.ToList().ForEach(specification =>

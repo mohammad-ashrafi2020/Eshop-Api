@@ -1,4 +1,5 @@
 ﻿using Common.Application.Validation;
+using Common.Application.Validation.FluentValidations;
 using FluentValidation;
 
 namespace Shop.Application.Products.Edit

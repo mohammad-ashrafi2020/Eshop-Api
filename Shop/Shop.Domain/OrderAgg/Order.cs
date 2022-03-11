@@ -18,7 +18,7 @@ namespace Shop.Domain.OrderAgg
         public Order(long userId)
         {
             UserId = userId;
-            Status = OrderStatus.Pennding;
+            Status = OrderStatus.Pending;
             Items = new List<OrderItem>();
         }
 
@@ -117,7 +117,7 @@ namespace Shop.Domain.OrderAgg
 
         public void ChangeOrderGuard()
         {
-            if (Status != OrderStatus.Pennding)
+            if (Status != OrderStatus.Pending)
                 throw new InvalidDomainDataException("امکان ویرایش این سفارش وجود ندارد");
         }
     }

@@ -3,7 +3,7 @@
     public enum SellerStatus
     {
         New,
-        Acceped,
+        Accepted,
         InActive,
         Rejected
     }
