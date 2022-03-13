@@ -22,14 +22,14 @@ namespace Shop.Domain.ProductAgg
         public string Description { get; private set; }
         public long CategoryId { get; private set; }
         public long SubCategoryId { get; private set; }
-        public long SecondarySubCategoryId { get; private set; }
+        public long? SecondarySubCategoryId { get; private set; }
         public string Slug { get; private set; }
         public SeoData SeoData { get; private set; }
         public List<ProductImage> Images { get; private set; }
         public List<ProductSpecification> Specifications { get; private set; }
 
         public Product(string title, string imageName, string description, long categoryId,
-           long subCategoryId, long secondarySubCategoryId, IProductDomainService domainService,
+           long subCategoryId, long? secondarySubCategoryId, IProductDomainService domainService,
            string slug, SeoData seoData)
         {
             NullOrEmptyDomainDataException.CheckString(imageName, nameof(imageName));

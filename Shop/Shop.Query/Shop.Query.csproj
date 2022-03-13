@@ -16,10 +16,13 @@
     <Folder Include="Orders\GetById\" />
     <Folder Include="Orders\GetByFilter\" />
     <Folder Include="Orders\DTOs\" />
+    <Folder Include="Products\GetById\" />
+    <Folder Include="Products\GetBySlug\" />
+    <Folder Include="Products\GetByFilter\" />
+    <Folder Include="Products\DTOs\" />
     <Folder Include="Sellers\" />
     <Folder Include="SiteEntities\" />
     <Folder Include="Roles\" />
-    <Folder Include="Products\" />
     <Folder Include="Users\" />
   </ItemGroup>
 
