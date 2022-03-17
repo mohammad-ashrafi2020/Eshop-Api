@@ -60,8 +60,8 @@ public static class ProductMapper
     }
     public static async Task SetCategories(this ProductDto product, ShopContext context)
     {
-        var category = await context.Categories
-            .Where(f => f.Id == product.Category.Id)
+        var categories = await context.Categories
+            .Where(r => r.Id == product.Category.Id || r.Id == product.SubCategory.Id)
             .Select(s => new ProductCategoryDto()
             {
                 Id = s.Id,
@@ -69,20 +69,7 @@ public static class ProductMapper
                 ParentId = s.ParentId,
                 SeoData = s.SeoData,
                 Title = s.Title
-            })
-            .FirstOrDefaultAsync();
-
-        var subCategory = await context.Categories
-            .Where(f => f.Id == product.SubCategory.Id)
-            .Select(s => new ProductCategoryDto()
-            {
-                Id = s.Id,
-                Slug = s.Slug,
-                ParentId = s.ParentId,
-                SeoData = s.SeoData,
-                Title = s.Title
-            })
-            .FirstOrDefaultAsync();
+            }).ToListAsync();
 
         if (product.SecondarySubCategory != null)
         {
@@ -101,12 +88,7 @@ public static class ProductMapper
             if (secondarySubCategory != null)
                 product.SecondarySubCategory = secondarySubCategory;
         }
-
-
-        if (category != null)
-            product.Category = category;
-
-        if (subCategory != null)
-            product.SubCategory = subCategory;
+        product.Category = categories.First(r => r.Id == product.Category.Id);
+        product.SubCategory = categories.First(r => r.Id == product.SubCategory.Id);
     }
 }

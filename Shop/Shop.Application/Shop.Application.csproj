@@ -21,7 +21,6 @@
     <Folder Include="Sellers\Create\" />
     <Folder Include="Sellers\Edit\" />
     <Folder Include="Sellers\AddInventory\" />
-    <Folder Include="Sellers\EditInventory\" />
     <Folder Include="SiteEntities\Sliders\Edit\" />
     <Folder Include="Users\Create\" />
     <Folder Include="Users\Edit\" />

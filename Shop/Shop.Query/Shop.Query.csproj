@@ -18,7 +18,6 @@
     <Folder Include="Orders\DTOs\" />
     <Folder Include="Products\GetById\" />
     <Folder Include="Products\GetBySlug\" />
-    <Folder Include="Products\GetByFilter\" />
     <Folder Include="Products\DTOs\" />
     <Folder Include="Roles\GetById\" />
     <Folder Include="Roles\GetList\" />
@@ -31,7 +30,9 @@
     <Folder Include="SiteEntities\DTOs\" />
     <Folder Include="SiteEntities\Sliders\GetById\" />
     <Folder Include="SiteEntities\Sliders\GetList\" />
-    <Folder Include="Users\" />
+    <Folder Include="Users\GetById\" />
+    <Folder Include="Users\GetByPhoneNumber\" />
+    <Folder Include="Users\DTOs\" />
   </ItemGroup>
 
   <ItemGroup>
