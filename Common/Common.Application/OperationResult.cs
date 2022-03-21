@@ -13,7 +13,7 @@
             return new OperationResult<TData>()
             {
                 Status = OperationResultStatus.Success,
-                Title = SuccessMessage,
+                Message = SuccessMessage,
                 Data = data,
             };
         }
