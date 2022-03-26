@@ -23,5 +23,6 @@ public enum AppStatusCode
     NotFound = 2,
     BadRequest = 3,
     LogicError = 4,
-    UnAuthorize = 5
+    UnAuthorize = 5,
+    ServerError
 }
