@@ -45,14 +45,14 @@ public class CategoryController : ApiController
     {
         var result = await _categoryFacade.Create(command);
         var url = Url.Action("GetCategoryById", "Category", new {id = result.Data}, Request.Scheme);
-        return CommandResult(result,HttpStatusCode.Created,url);
+        return CommandResult(result, url, HttpStatusCode.Created);
     }
     [HttpPost("AddChild")]
     public async Task<ApiResult<long>> CreateCategory(AddChildCategoryCommand command)
     {
         var result = await _categoryFacade.AddChild(command);
         var url = Url.Action("GetCategoryById", "Category", new { id = result.Data }, Request.Scheme);
-        return CommandResult(result, HttpStatusCode.Created, url);
+        return CommandResult(result, url, HttpStatusCode.Created);
     }
     [HttpPut]
     public async Task<ApiResult> EditCategory(EditCategoryCommand command)

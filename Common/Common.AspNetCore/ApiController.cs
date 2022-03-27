@@ -20,8 +20,8 @@ public class ApiController : ControllerBase
             }
         };
     }
-    protected ApiResult<TData?> CommandResult<TData>(OperationResult<TData> result
-        , HttpStatusCode statusCode = HttpStatusCode.OK, string locationUrl = null)
+    protected ApiResult<TData?> CommandResult<TData>(OperationResult<TData> result, string locationUrl
+        , HttpStatusCode statusCode = HttpStatusCode.OK)
     {
         bool isSuccess = result.Status == OperationResultStatus.Success;
         if (isSuccess)
