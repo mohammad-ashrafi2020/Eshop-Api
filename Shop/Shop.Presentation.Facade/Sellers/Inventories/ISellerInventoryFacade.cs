@@ -8,12 +8,12 @@ namespace Shop.Presentation.Facade.Sellers.Inventories;
 public interface ISellerInventoryFacade
 {
     Task<OperationResult> AddInventory(AddSellerInventoryCommand command);
-    Task<OperationResult> AddInventory(EditSellerInventoryCommand command);
+    Task<OperationResult> EditInventory(EditSellerInventoryCommand command);
 }
 
 internal class SellerInventoryFacade : ISellerInventoryFacade
 {
-    private IMediator _mediator;
+    private readonly IMediator _mediator;
 
     public SellerInventoryFacade(IMediator mediator)
     {
@@ -25,7 +25,7 @@ internal class SellerInventoryFacade : ISellerInventoryFacade
         return await _mediator.Send(command);
     }
 
-    public async Task<OperationResult> AddInventory(EditSellerInventoryCommand command)
+    public async Task<OperationResult> EditInventory(EditSellerInventoryCommand command)
     {
         return await _mediator.Send(command);
     }

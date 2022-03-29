@@ -30,6 +30,8 @@
     <Folder Include="SiteEntities\DTOs\" />
     <Folder Include="SiteEntities\Sliders\GetById\" />
     <Folder Include="SiteEntities\Sliders\GetList\" />
+    <Folder Include="Users\Addresses\GetById\" />
+    <Folder Include="Users\Addresses\GetList\" />
     <Folder Include="Users\GetById\" />
     <Folder Include="Users\GetByPhoneNumber\" />
     <Folder Include="Users\DTOs\" />

@@ -20,7 +20,7 @@ public class EditUserAddressCommand : IBaseCommand
         UserId = userId;
     }
 
-    public long UserId { get; private set; }
+    public long UserId { get;  set; }
     public long Id { get; set; }
     public string Shire { get; private set; }
     public string City { get; private set; }

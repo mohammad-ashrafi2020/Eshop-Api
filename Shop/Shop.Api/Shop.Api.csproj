@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -21,6 +22,11 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Common.AspNetCore\Common.AspNetCore.csproj" />
     <ProjectReference Include="..\Shop.Config\Shop.Config.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\Users\" />
+    <Folder Include="Infrastructure\" />
   </ItemGroup>
 
 </Project>
