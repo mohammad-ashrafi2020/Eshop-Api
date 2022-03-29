@@ -1,8 +1,9 @@
 ﻿using Common.Domain.ValueObjects;
+using Common.Query;
 
 namespace Shop.Query.Users.DTOs;
 
-public class AddressDto
+public class AddressDto:BaseDto
 {
     public long UserId { get;  set; }
     public string Shire { get;  set; }
