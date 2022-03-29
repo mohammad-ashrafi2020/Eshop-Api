@@ -14,7 +14,7 @@ namespace Shop.Domain.UserAgg
     {
         private User()
         {
-            
+
         }
         public User(string name, string family, string phoneNumber, string email,
             string password, Gender gender, IUserDomainService userDomainService)
@@ -28,6 +28,7 @@ namespace Shop.Domain.UserAgg
             Password = password;
             Gender = gender;
             AvatarName = "avatar.png";
+            IsActive = true;
         }
 
         public string Name { get; private set; }
@@ -36,6 +37,7 @@ namespace Shop.Domain.UserAgg
         public string Email { get; private set; }
         public string Password { get; private set; }
         public string AvatarName { get; set; }
+        public bool IsActive { get; set; }
         public Gender Gender { get; private set; }
         public List<UserRole> Roles { get; private set; }
         public List<Wallet> Wallets { get; private set; }
@@ -106,13 +108,13 @@ namespace Shop.Domain.UserAgg
         public void Guard(string phoneNumber, string email, IUserDomainService userDomainService)
         {
             NullOrEmptyDomainDataException.CheckString(phoneNumber, nameof(phoneNumber));
-            NullOrEmptyDomainDataException.CheckString(email, nameof(email));
 
             if (phoneNumber.Length != 11)
                 throw new InvalidDomainDataException("شماره موبایل نامعتبر است");
 
-            if (email.IsValidEmail() == false)
-                throw new InvalidDomainDataException(" ایمیل  نامعتبر است");
+            if (!string.IsNullOrWhiteSpace(email))
+                if (email.IsValidEmail() == false)
+                    throw new InvalidDomainDataException(" ایمیل  نامعتبر است");
 
             if (phoneNumber != PhoneNumber)
                 if (userDomainService.PhoneNumberIsExist(phoneNumber))

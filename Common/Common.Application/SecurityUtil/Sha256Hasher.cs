@@ -14,7 +14,7 @@ public class Sha256Hasher
     }
     public static bool IsCompare(string hashText, string rawText)
     {
-        rawText = Hash(rawText);
-        return hashText == rawText;
+        var hash = Hash(rawText);
+        return hashText == hash;
     }
 }
