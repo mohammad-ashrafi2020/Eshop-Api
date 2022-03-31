@@ -1,16 +1,33 @@
 using Common.Application;
 using Common.Application.FileUtil.Interfaces;
 using Common.Application.FileUtil.Services;
+using Common.AspNetCore;
 using Common.AspNetCore.Middlewares;
+using Microsoft.AspNetCore.Mvc;
 using Shop.Api.Infrastructure.JwtUtil;
 using Shop.Config;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddControllers()
+    .ConfigureApiBehaviorOptions(option =>
+    {
+        option.InvalidModelStateResponseFactory = (context =>
+        {
+            var result = new ApiResult()
+            {
+                IsSuccess = false,
+                MetaData = new()
+                {
+                    AppStatusCode = AppStatusCode.BadRequest,
+                    Message = ModelStateUtil.GetModelStateErrors(context.ModelState)
+                }
+            };
+            return new BadRequestObjectResult(result);
+        });
+    });
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

@@ -23,19 +23,6 @@ public class AuthController : ApiController
     [HttpPost("login")]
     public async Task<ApiResult<string?>> Login(LoginViewModel loginViewModel)
     {
-        if (ModelState.IsValid == false)
-        {
-            return new ApiResult<string?>()
-            {
-                Data = null,
-                IsSuccess = false,
-                MetaData = new()
-                {
-                    AppStatusCode = AppStatusCode.BadRequest,
-                    Message = JoinErrors()
-                }
-            };
-        }
         var user = await _userFacade.GetUserByPhoneNumber(loginViewModel.PhoneNumber);
         if (user == null)
         {
@@ -67,18 +54,6 @@ public class AuthController : ApiController
     [HttpPost("register")]
     public async Task<ApiResult> Register(RegisterViewModel register)
     {
-        if (ModelState.IsValid == false)
-        {
-            return new ApiResult()
-            {
-                IsSuccess = false,
-                MetaData = new()
-                {
-                    AppStatusCode = AppStatusCode.BadRequest,
-                    Message = JoinErrors()
-                }
-            };
-        }
         var command = new RegisterUserCommand(new PhoneNumber(register.PhoneNumber), register.Password);
         var result = await _userFacade.RegisterUser(command);
         return CommandResult(result);
