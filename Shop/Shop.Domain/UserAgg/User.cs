@@ -29,6 +29,10 @@ namespace Shop.Domain.UserAgg
             Gender = gender;
             AvatarName = "avatar.png";
             IsActive = true;
+            Roles = new();
+            Wallets = new();
+            Addresses = new();
+            Tokens = new();
         }
 
         public string Name { get; private set; }
@@ -38,10 +42,12 @@ namespace Shop.Domain.UserAgg
         public string Password { get; private set; }
         public string AvatarName { get; set; }
         public bool IsActive { get; set; }
+
         public Gender Gender { get; private set; }
-        public List<UserRole> Roles { get; private set; }
-        public List<Wallet> Wallets { get; private set; }
-        public List<UserAddress> Addresses { get; private set; }
+        public List<UserRole> Roles { get; }
+        public List<Wallet> Wallets { get; }
+        public List<UserAddress> Addresses { get; }
+        public List<UserToken> Tokens { get; }
 
         public void Edit(string name, string family, string phoneNumber, string email,
             Gender gender, IUserDomainService userDomainService)
@@ -105,6 +111,16 @@ namespace Shop.Domain.UserAgg
             Roles.AddRange(roles);
         }
 
+        public void AddToken(string hashJwtToken, string hashRefreshToken, DateTime tokenExpireDate, DateTime refreshTokenExpireDate, string device)
+        {
+            var activeTokenCount = Tokens.Count(c => c.RefreshTokenExpireDate > DateTime.Now);
+            if (activeTokenCount == 3)
+                throw new InvalidDomainDataException("امکان استفاده از 4 دستگاه همزمان وجود ندارد");
+
+            var token = new UserToken(hashJwtToken,hashRefreshToken,tokenExpireDate,refreshTokenExpireDate,device);
+            token.UserId = Id;
+            Tokens.Add(token);
+        }
         public void Guard(string phoneNumber, string email, IUserDomainService userDomainService)
         {
             NullOrEmptyDomainDataException.CheckString(phoneNumber, nameof(phoneNumber));

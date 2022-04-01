@@ -1,5 +1,6 @@
 ﻿using Common.Application;
 using MediatR;
+using Shop.Application.Users.AddToken;
 using Shop.Application.Users.Create;
 using Shop.Application.Users.Edit;
 using Shop.Application.Users.Register;
@@ -20,6 +21,11 @@ internal class UserFacade : IUserFacade
 
 
     public async Task<OperationResult> CreateUser(CreateUserCommand command)
+    {
+        return await _mediator.Send(command);
+    }
+
+    public async Task<OperationResult> AddToken(AddUserTokenCommand command)
     {
         return await _mediator.Send(command);
     }
