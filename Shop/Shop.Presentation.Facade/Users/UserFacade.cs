@@ -11,6 +11,8 @@ using Shop.Query.Users.GetByFilter;
 using Shop.Query.Users.GetById;
 using Shop.Query.Users.GetByPhoneNumber;
 using Shop.Query.Users.UserTokens;
+using Shop.Query.Users.UserTokens.GetByJwtToken;
+using Shop.Query.Users.UserTokens.GetByRefreshToken;
 
 namespace Shop.Presentation.Facade.Users;
 
@@ -52,6 +54,12 @@ internal class UserFacade : IUserFacade
     {
         var hashRefreshToken = Sha256Hasher.Hash(refreshToken);
         return await _mediator.Send(new GetUserTokenByRefreshTokenQuery(hashRefreshToken));
+    }
+
+    public async Task<UserTokenDto?> GetUserTokenByJwtToken(string jwtToken)
+    {
+        var hashJwtToken = Sha256Hasher.Hash(jwtToken);
+        return await _mediator.Send(new GetUserTokenByJwtTokenQuery(hashJwtToken));
     }
 
     public async Task<UserFilterResult> GetUserByFilter(UserFilterParams filterParams)
