@@ -35,6 +35,7 @@
     <Folder Include="Users\GetById\" />
     <Folder Include="Users\GetByPhoneNumber\" />
     <Folder Include="Users\DTOs\" />
+    <Folder Include="Users\UserTokens\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -29,7 +29,7 @@
     <Folder Include="Users\DeleteAddress\" />
     <Folder Include="Users\EditAddress\" />
     <Folder Include="Users\AddToken\" />
-    <Folder Include="Users\NewFolder\" />
+    <Folder Include="Users\RemoveToken\" />
     <Folder Include="Users\Register\" />
   </ItemGroup>
 
