@@ -1,14 +1,17 @@
 ﻿using Common.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Shop.Api.Infrastructure.Security;
 using Shop.Application.SiteEntities.Banners.Create;
 using Shop.Application.SiteEntities.Banners.Edit;
+using Shop.Domain.RoleAgg;
+using Shop.Domain.RoleAgg.Enums;
 using Shop.Presentation.Facade.SiteEntities.Banner;
 using Shop.Query.SiteEntities.DTOs;
 
 namespace Shop.Api.Controllers;
 
-[Authorize]
+[PermissionChecker(Permission.CRUD_Banner)]
 public class BannerController : ApiController
 {
     private readonly IBannerFacade _facade;
@@ -19,6 +22,7 @@ public class BannerController : ApiController
         _facade = facade;
     }
 
+    [AllowAnonymous]
     [HttpGet]
     public async Task<ApiResult<List<BannerDto>>> GetList()
     {

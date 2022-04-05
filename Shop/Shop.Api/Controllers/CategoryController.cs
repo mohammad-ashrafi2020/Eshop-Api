@@ -1,16 +1,21 @@
 ﻿using System.Net;
 using Common.Application;
 using Common.AspNetCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Shop.Api.Infrastructure.Security;
 using Shop.Application.Categories.AddChild;
 using Shop.Application.Categories.Create;
 using Shop.Application.Categories.Edit;
+using Shop.Domain.RoleAgg.Enums;
 using Shop.Presentation.Facade.Categories;
 using Shop.Query.Categories.DTOs;
 
 namespace Shop.Api.Controllers;
 
+
+[PermissionChecker(Permission.Category_Management)]
 public class CategoryController : ApiController
 {
     private readonly ICategoryFacade _categoryFacade;
@@ -20,6 +25,7 @@ public class CategoryController : ApiController
         _categoryFacade = categoryFacade;
     }
 
+    [AllowAnonymous]
     [HttpGet]
     public async Task<ApiResult<List<CategoryDto>>> GetCategories()
     {
@@ -27,6 +33,7 @@ public class CategoryController : ApiController
         return QueryResult(result);
     }
 
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<ApiResult<CategoryDto>> GetCategoryById(long id)
     {

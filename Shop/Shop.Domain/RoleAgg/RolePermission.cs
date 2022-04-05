@@ -1,4 +1,5 @@
 ﻿using Common.Domain;
+using Shop.Domain.RoleAgg.Enums;
 
 namespace Shop.Domain.RoleAgg
 {

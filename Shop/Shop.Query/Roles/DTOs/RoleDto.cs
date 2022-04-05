@@ -1,5 +1,6 @@
 ﻿using Common.Query;
 using Shop.Domain.RoleAgg;
+using Shop.Domain.RoleAgg.Enums;
 
 namespace Shop.Query.Roles.DTOs;
 
