@@ -16,6 +16,7 @@
         Category_Management,
         Add_Inventory,
         Edit_Inventory,
-        User_Management
+        User_Management,
+        Seller_Panel
     }
 }

@@ -5,6 +5,7 @@ using Shop.Application.Sellers.Edit;
 using Shop.Query.Sellers.DTOs;
 using Shop.Query.Sellers.GetByFilter;
 using Shop.Query.Sellers.GetById;
+using Shop.Query.Sellers.GetByUserId;
 
 namespace Shop.Presentation.Facade.Sellers;
 
@@ -32,6 +33,12 @@ internal class SellerFacade : ISellerFacade
         return await _mediator.Send(new GetSellerByIdQuery(sellerId));
 
     }
+
+    public async Task<SellerDto?> GetSellerByUserId(long userId)
+    {
+        return await _mediator.Send(new GetSellerByUserIdQuery(userId));
+    }
+
     public async Task<SellerFilterResult> GetSellersByFilter(SellerFilterParams filterParams)
     {
         return await _mediator.Send(new GetSellerByFilterQuery(filterParams));

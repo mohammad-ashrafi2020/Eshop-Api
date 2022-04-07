@@ -15,7 +15,8 @@ public static class DependencyRegister
                 builder =>
                 {
                     builder.AllowAnyOrigin()
-                        .AllowAnyMethod();
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
                 });
         });
     }
