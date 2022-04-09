@@ -1,6 +1,7 @@
 ﻿using Common.Application;
 using MediatR;
 using Shop.Application.SiteEntities.Banners.Create;
+using Shop.Application.SiteEntities.Banners.Delete;
 using Shop.Application.SiteEntities.Banners.Edit;
 using Shop.Query.SiteEntities.Banners.GetById;
 using Shop.Query.SiteEntities.Banners.GetList;
@@ -24,6 +25,12 @@ internal class BannerFacade : IBannerFacade
     {
         return await _mediator.Send(command);
     }
+
+    public async Task<OperationResult> DeleteBanner(long bannerId)
+    {
+        return await _mediator.Send(new DeleteBannerCommand(bannerId));
+    }
+
     public async Task<BannerDto?> GetBannerById(long id)
     {
         return await _mediator.Send(new GetBannerByIdQuery(id));

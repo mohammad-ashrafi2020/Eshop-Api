@@ -49,4 +49,11 @@ public class BannerController : ApiController
         var result = await _facade.EditBanner(command);
         return CommandResult(result);
     }
+
+    [HttpDelete("{bannerId}")]
+    public async Task<ApiResult> Delete(long bannerId)
+    {
+        var result = await _facade.DeleteBanner(bannerId);
+        return CommandResult(result);
+    }
 }
