@@ -31,7 +31,12 @@ public class OrderController : ApiController
         var result = await _orderFacade.GetOrdersByFilter(filterParams);
         return QueryResult(result);
     }
-
+    [HttpGet("current")]
+    public async Task<ApiResult<OrderDto?>> GetCurrentOrder()
+    {
+        var result = await _orderFacade.GetCurrentOrder(User.GetUserId());
+        return QueryResult(result);
+    }
 
     [HttpGet("{orderId}")]
     public async Task<ApiResult<OrderDto?>> GetOrderById(long orderId)
@@ -68,10 +73,10 @@ public class OrderController : ApiController
         return CommandResult(result);
     }
 
-    [HttpDelete("orderItem")]
-    public async Task<ApiResult> RemoveOrderItem(RemoveOrderItemCommand command)
+    [HttpDelete("orderItem/{itemId}")]
+    public async Task<ApiResult> RemoveOrderItem(long itemId)
     {
-        var result = await _orderFacade.RemoveOrderItem(command);
+        var result = await _orderFacade.RemoveOrderItem(new RemoveOrderItemCommand(User.GetUserId(),itemId));
         return CommandResult(result);
     }
 }

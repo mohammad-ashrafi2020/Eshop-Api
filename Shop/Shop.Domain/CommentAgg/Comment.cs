@@ -23,7 +23,7 @@ namespace Shop.Domain.CommentAgg
             UserId = userId;
             ProductId = productId;
             Text = text;
-            Status = CommentStatus.Pennding;
+            Status = CommentStatus.Pending;
         }
 
         public void Edit(string text)
@@ -43,7 +43,7 @@ namespace Shop.Domain.CommentAgg
 
     public enum CommentStatus
     {
-        Pennding,
+        Pending,
         Accepted,
         Rejected
     }
