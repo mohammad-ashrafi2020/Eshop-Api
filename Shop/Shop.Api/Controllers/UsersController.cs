@@ -1,9 +1,12 @@
-﻿using Common.AspNetCore;
+﻿using AutoMapper;
+using Common.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Api.Infrastructure.Security;
+using Shop.Api.ViewModels.Users;
 using Shop.Application.SiteEntities.Banners.Edit;
+using Shop.Application.Users.ChangePassword;
 using Shop.Application.Users.Create;
 using Shop.Application.Users.Edit;
 using Shop.Domain.RoleAgg.Enums;
@@ -17,14 +20,15 @@ namespace Shop.Api.Controllers;
 public class UsersController : ApiController
 {
     private readonly IUserFacade _userFacade;
-
-    public UsersController(IUserFacade userFacade)
+    private readonly IMapper _mapper;
+    public UsersController(IUserFacade userFacade, IMapper mapper)
     {
         _userFacade = userFacade;
+        _mapper = mapper;
     }
     [PermissionChecker(Permission.User_Management)]
     [HttpGet]
-    public async Task<ApiResult<UserFilterResult>> GetUsers([FromQuery]UserFilterParams filterParams)
+    public async Task<ApiResult<UserFilterResult>> GetUsers([FromQuery] UserFilterParams filterParams)
     {
         var result = await _userFacade.GetUserByFilter(filterParams);
         return QueryResult(result);
@@ -52,14 +56,23 @@ public class UsersController : ApiController
         return CommandResult(result);
     }
 
+    [HttpPut("ChangePassword")]
+    public async Task<ApiResult> ChangePassword(ChangePasswordViewModel command)
+    {
+        var changePasswordModel = _mapper.Map<ChangeUserPasswordCommand>(command);
+        changePasswordModel.UserId = User.GetUserId();
+        var result = await _userFacade.ChangePassword(changePasswordModel);
+        return CommandResult(result);
+    }
 
     [PermissionChecker(Permission.User_Management)]
     [HttpPut]
     public async Task<ApiResult> Edit(EditUserCommand command)
     {
+        command.UserId = User.GetUserId();
         var result = await _userFacade.EditUser(command);
         return CommandResult(result);
     }
 
-   
+
 }

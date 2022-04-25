@@ -60,6 +60,12 @@ namespace Shop.Domain.UserAgg
             Gender = gender;
         }
 
+        public void ChangePassword(string newPassword)
+        {
+            NullOrEmptyDomainDataException.CheckString(newPassword, nameof(newPassword));
+
+            Password = newPassword;
+        }
         public static User RegisterUser(string phoneNumber, string password, IUserDomainService userDomainService)
         {
             return new User("", "", phoneNumber, null, password, Gender.None, userDomainService);
@@ -117,7 +123,7 @@ namespace Shop.Domain.UserAgg
             if (activeTokenCount == 3)
                 throw new InvalidDomainDataException("امکان استفاده از 4 دستگاه همزمان وجود ندارد");
 
-            var token = new UserToken(hashJwtToken,hashRefreshToken,tokenExpireDate,refreshTokenExpireDate,device);
+            var token = new UserToken(hashJwtToken, hashRefreshToken, tokenExpireDate, refreshTokenExpireDate, device);
             token.UserId = Id;
             Tokens.Add(token);
         }
