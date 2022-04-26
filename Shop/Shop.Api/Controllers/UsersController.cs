@@ -65,14 +65,21 @@ public class UsersController : ApiController
         return CommandResult(result);
     }
 
-    [PermissionChecker(Permission.User_Management)]
-    [HttpPut]
-    public async Task<ApiResult> Edit(EditUserCommand command)
+    [HttpPut("Current")]
+    public async Task<ApiResult> EditUser([FromForm] EditUserViewModel command)
     {
-        command.UserId = User.GetUserId();
-        var result = await _userFacade.EditUser(command);
+        var commandModel = new EditUserCommand(User.GetUserId(), command.Avatar, command.Name, command.Family,
+            command.PhoneNumber, command.Email, command.Gender);
+
+        var result = await _userFacade.EditUser(commandModel);
         return CommandResult(result);
     }
 
-
+    [PermissionChecker(Permission.User_Management)]
+    [HttpPut]
+    public async Task<ApiResult> Edit([FromForm] EditUserCommand command)
+    {
+        var result = await _userFacade.EditUser(command);
+        return CommandResult(result);
+    }
 }

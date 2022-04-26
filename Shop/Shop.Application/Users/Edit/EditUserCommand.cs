@@ -7,7 +7,7 @@ namespace Shop.Application.Users.Edit;
 
 public class EditUserCommand : IBaseCommand
 {
-    public EditUserCommand(long userId, IFormFile? avatar, string name, string family, string phoneNumber, string email, string password, Gender gender)
+    public EditUserCommand(long userId, IFormFile? avatar, string name, string family, string phoneNumber, string email, Gender gender)
     {
         UserId = userId;
         Avatar = avatar;
@@ -15,7 +15,6 @@ public class EditUserCommand : IBaseCommand
         Family = family;
         PhoneNumber = phoneNumber;
         Email = email;
-        Password = password;
         Gender = gender;
     }
     public long UserId { get;  set; }
@@ -24,6 +23,5 @@ public class EditUserCommand : IBaseCommand
     public string Family { get; private set; }
     public string PhoneNumber { get; private set; }
     public string Email { get; private set; }
-    public string Password { get; private set; }
     public Gender Gender { get; private set; }
 }

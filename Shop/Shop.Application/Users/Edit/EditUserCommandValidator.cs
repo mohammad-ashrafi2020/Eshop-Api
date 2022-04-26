@@ -13,8 +13,6 @@ public class EditUserCommandValidator : AbstractValidator<EditUserCommand>
         RuleFor(r => r.Email)
             .EmailAddress().WithMessage("ایمیل نامعتبر است");
 
-        RuleFor(f => f.Password)
-            .MinimumLength(4).WithMessage("کلمه عبور باید بشتر از 4 کارکتر باشد");
 
         RuleFor(f => f.Avatar)
             .JustImageFile();
