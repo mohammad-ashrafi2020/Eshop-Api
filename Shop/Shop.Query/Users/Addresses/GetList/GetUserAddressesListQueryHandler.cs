@@ -18,7 +18,7 @@ internal class GetUserAddressesListQueryHandler : IQueryHandler<GetUserAddresses
     {
         var sql = $"Select * from {_dapperContext.UserAddresses} where UserId=@userId";
         using var context = _dapperContext.CreateConnection();
-        var result = await context.QueryAsync<AddressDto>(sql, new { id = request.UserId });
+        var result = await context.QueryAsync<AddressDto>(sql, new { userId = request.UserId });
         return result.ToList();
     }
 }
