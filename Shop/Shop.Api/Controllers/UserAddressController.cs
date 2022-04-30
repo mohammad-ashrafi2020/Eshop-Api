@@ -52,8 +52,7 @@ public class UserAddressController : ApiController
     [HttpDelete("{addressId}")]
     public async Task<ApiResult> Delete(long addressId)
     {
-        var userId = 1;
-        var result = await _userAddress.DeleteAddress(new DeleteUserAddressCommand(userId, addressId));
+        var result = await _userAddress.DeleteAddress(new DeleteUserAddressCommand(User.GetUserId(), addressId));
         return CommandResult(result);
     }
 
@@ -62,7 +61,7 @@ public class UserAddressController : ApiController
     {
         var command = new EditUserAddressCommand(viewModel.Shire, viewModel.City, viewModel.PostalCode,
             viewModel.PostalAddress, new PhoneNumber(viewModel.PhoneNumber), viewModel.Name,
-            viewModel.Family, viewModel.NationalCode, User.GetUserId());
+            viewModel.Family, viewModel.NationalCode, User.GetUserId(), viewModel.Id);
 
         command.UserId = User.GetUserId();
         var result = await _userAddress.EditAddress(command);
