@@ -8,6 +8,7 @@ using Shop.Api.ViewModels.Users;
 using Shop.Application.Users.AddAddress;
 using Shop.Application.Users.DeleteAddress;
 using Shop.Application.Users.EditAddress;
+using Shop.Application.Users.SetActiveAddress;
 using Shop.Presentation.Facade.Users.Addresses;
 using Shop.Query.Users.DTOs;
 
@@ -65,6 +66,14 @@ public class UserAddressController : ApiController
 
         command.UserId = User.GetUserId();
         var result = await _userAddress.EditAddress(command);
+        return CommandResult(result);
+    }
+    [HttpPut("SetActiveAddress/{addressId}")]
+    public async Task<ApiResult> SetAddressActive(long addressId)
+    {
+        var command = new SetActiveUserAddressCommand(User.GetUserId(), addressId);
+
+        var result = await _userAddress.SetActiveAddress(command);
         return CommandResult(result);
     }
 }

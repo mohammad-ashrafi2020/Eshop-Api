@@ -30,6 +30,7 @@
     <Folder Include="Users\EditAddress\" />
     <Folder Include="Users\AddToken\" />
     <Folder Include="Users\ChangePassword\" />
+    <Folder Include="Users\SetActiveAddress\" />
     <Folder Include="Users\RemoveToken\" />
     <Folder Include="Users\Register\" />
   </ItemGroup>

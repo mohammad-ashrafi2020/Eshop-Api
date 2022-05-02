@@ -104,6 +104,19 @@ namespace Shop.Domain.UserAgg
                 address.Name, address.Family, address.NationalCode);
         }
 
+        public void SetActiveAddress(long addressId)
+        {
+            var currentAddress = Addresses.FirstOrDefault(f => f.Id == addressId);
+            if (currentAddress == null)
+                throw new NullOrEmptyDomainDataException("Address Not found");
+
+            foreach (var address in Addresses)
+            {
+                address.SetDeActive();
+            }
+            currentAddress.SetActive();
+        }
+
         public void ChargeWallet(Wallet wallet)
         {
             wallet.UserId = Id;
