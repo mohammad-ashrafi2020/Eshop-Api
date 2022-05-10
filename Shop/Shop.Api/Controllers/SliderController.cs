@@ -40,7 +40,7 @@ public class SliderController : ApiController
     }
 
     [HttpPost]
-    public async Task<ApiResult> Create([FromForm]CreateSliderCommand command)
+    public async Task<ApiResult> Create([FromForm] CreateSliderCommand command)
     {
         var result = await _facade.CreateSlider(command);
         return CommandResult(result);

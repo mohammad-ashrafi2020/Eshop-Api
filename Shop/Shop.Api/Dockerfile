@@ -19,4 +19,4 @@ RUN dotnet publish "Shop.Api.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Shop.Api.dll"]
+ENTRYPOINT ["dotnet", "Shop.Api.dll"] #Run in Background -> Application ro Tooye Background Negah Midare Ta Container Az Bayn Nare
