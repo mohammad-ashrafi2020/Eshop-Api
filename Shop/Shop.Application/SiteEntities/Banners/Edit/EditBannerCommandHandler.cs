@@ -1,5 +1,6 @@
 ﻿using Common.Application;
 using Common.Application.FileUtil.Interfaces;
+using Common.Application.SecurityUtil;
 using Microsoft.AspNetCore.Http;
 using Shop.Application._Utilities;
 using Shop.Domain.SiteEntities.Repositories;
@@ -24,19 +25,20 @@ public class EditBannerCommandHandler : IBaseCommandHandler<EditBannerCommand>
         var imageName = banner.ImageName;
         var oldImage = banner.ImageName;
         
-        if (request.ImageFile != null)
+        if (request.ImageFile.IsImage())
             imageName = await _fileService
                 .SaveFileAndGenerateName(request.ImageFile, Directories.BannerImages);
 
         banner.Edit(request.Link,imageName,request.Position);
 
         DeleteOldImage(request.ImageFile, oldImage);
+        await _repository.Save();
         return OperationResult.Success();
     }
 
     private void DeleteOldImage(IFormFile? imageFile, string oldImage)
     {
-        if (imageFile != null)
-            _fileService.DeleteFile(Directories.SliderImages, oldImage);
+        if (imageFile.IsImage())
+            _fileService.DeleteFile(Directories.BannerImages, oldImage);
     }
 }
