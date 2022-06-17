@@ -1,7 +1,5 @@
 ﻿using Common.Application;
-using Common.Caching;
 using MediatR;
-using Microsoft.Extensions.Caching.Distributed;
 using Shop.Application.Categories.AddChild;
 using Shop.Application.Categories.Create;
 using Shop.Application.Categories.Edit;
@@ -16,34 +14,29 @@ namespace Shop.Presentation.Facade.Categories;
 internal class CategoryFacade : ICategoryFacade
 {
     private readonly IMediator _mediator;
-    private IDistributedCache _cache;
-    public CategoryFacade(IMediator mediator, IDistributedCache cache)
+
+    public CategoryFacade(IMediator mediator)
     {
         _mediator = mediator;
-        _cache = cache;
     }
 
     public async Task<OperationResult<long>> AddChild(AddChildCategoryCommand command)
     {
-        await _cache.RemoveAsync(CacheKeys.Categories);
         return await _mediator.Send(command);
     }
 
     public async Task<OperationResult> Edit(EditCategoryCommand command)
     {
-        await _cache.RemoveAsync(CacheKeys.Categories);
         return await _mediator.Send(command);
     }
 
     public async Task<OperationResult<long>> Create(CreateCategoryCommand command)
     {
-        await _cache.RemoveAsync(CacheKeys.Categories);
         return await _mediator.Send(command);
     }
 
     public async Task<OperationResult> Remove(long categoryId)
     {
-        await _cache.RemoveAsync(CacheKeys.Categories);
         return await _mediator.Send(new RemoveCategoryCommand(categoryId));
     }
 
@@ -55,17 +48,11 @@ internal class CategoryFacade : ICategoryFacade
     public async Task<List<ChildCategoryDto>> GetCategoriesByParentId(long parentId)
     {
         return await _mediator.Send(new GetCategoryByParentIdQuery(parentId));
+
     }
 
     public async Task<List<CategoryDto>> GetCategories()
     {
-        return (await _cache.GetOrSet(CacheKeys.Categories, () =>
-        {
-            return _mediator.Send(new GetCategoryListQuery());
-        }, new CacheOptions()
-        {
-            AbsoluteExpirationCacheFromMinutes = 30,
-            ExpireSlidingCacheFromMinutes = 15
-        }))!;
+        return await _mediator.Send(new GetCategoryListQuery());
     }
 }

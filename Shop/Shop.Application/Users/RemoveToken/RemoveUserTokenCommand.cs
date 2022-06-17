@@ -2,4 +2,4 @@
 
 namespace Shop.Application.Users.RemoveToken;
 
-public record RemoveUserTokenCommand(long UserId,long TokenId) : IBaseCommand<string>;
+public record RemoveUserTokenCommand(long UserId,long TokenId) : IBaseCommand;

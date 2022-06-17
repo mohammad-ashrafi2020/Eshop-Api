@@ -1,9 +1,6 @@
-﻿using System.Net.Http.Headers;
-using Common.Application;
+﻿using Common.Application;
 using Common.Application.SecurityUtil;
-using Common.Caching;
 using MediatR;
-using Microsoft.Extensions.Caching.Distributed;
 using Shop.Application.Users.AddToken;
 using Shop.Application.Users.ChangePassword;
 using Shop.Application.Users.Create;
@@ -23,11 +20,9 @@ namespace Shop.Presentation.Facade.Users;
 internal class UserFacade : IUserFacade
 {
     private readonly IMediator _mediator;
-    private readonly IDistributedCache _distributedCache;
-    public UserFacade(IMediator mediator, IDistributedCache distributedCache)
+    public UserFacade(IMediator mediator)
     {
         _mediator = mediator;
-        _distributedCache = distributedCache;
     }
 
 
@@ -41,43 +36,24 @@ internal class UserFacade : IUserFacade
         return await _mediator.Send(command);
     }
 
-    public async Task<OperationResult<string>> RemoveToken(RemoveUserTokenCommand command)
+    public async Task<OperationResult> RemoveToken(RemoveUserTokenCommand command)
     {
-        var result = await _mediator.Send(command);
-        if (result.Status == OperationResultStatus.Success)
-        {
-            await _distributedCache.RemoveAsync(CacheKeys.Token(result.Data));
-        }
-
-        return result;
+        return await _mediator.Send(command);
     }
 
     public async Task<OperationResult> ChangePassword(ChangeUserPasswordCommand command)
     {
-        var result = await _mediator.Send(command);
-        if (result.Status == OperationResultStatus.Success)
-            await _distributedCache.RemoveAsync(CacheKeys.SingleUser(command.UserId));
-
-        return result;
+        return await _mediator.Send(command);
     }
 
     public async Task<OperationResult> EditUser(EditUserCommand command)
     {
-        var result = await _mediator.Send(command);
-        if (result.Status == OperationResultStatus.Success)
-            await _distributedCache.RemoveAsync(CacheKeys.SingleUser(command.UserId));
-
-        return result;
+        return await _mediator.Send(command);
     }
 
     public async Task<UserDto?> GetUserById(long userId)
     {
-        return await _distributedCache.GetOrSet(CacheKeys.SingleUser(userId),
-            () => _mediator.Send(new GetUserByIdQuery(userId)), new CacheOptions()
-            {
-                AbsoluteExpirationCacheFromMinutes = 5,
-                ExpireSlidingCacheFromMinutes = 2
-            });
+        return await _mediator.Send(new GetUserByIdQuery(userId));
     }
 
     public async Task<UserTokenDto?> GetUserTokenByRefreshToken(string refreshToken)
@@ -89,10 +65,7 @@ internal class UserFacade : IUserFacade
     public async Task<UserTokenDto?> GetUserTokenByJwtToken(string jwtToken)
     {
         var hashJwtToken = Sha256Hasher.Hash(jwtToken);
-        return await _distributedCache.GetOrSet(CacheKeys.Token(hashJwtToken), () =>
-        {
-            return _mediator.Send(new GetUserTokenByJwtTokenQuery(hashJwtToken));
-        });
+        return await _mediator.Send(new GetUserTokenByJwtTokenQuery(hashJwtToken));
     }
 
     public async Task<UserFilterResult> GetUserByFilter(UserFilterParams filterParams)
