@@ -16,7 +16,7 @@ namespace Shop.Presentation.Facade.Users
         Task<OperationResult> EditUser(EditUserCommand command);
         Task<OperationResult> CreateUser(CreateUserCommand command);
         Task<OperationResult> AddToken(AddUserTokenCommand command);
-        Task<OperationResult> RemoveToken(RemoveUserTokenCommand command);
+        Task<OperationResult<string>> RemoveToken(RemoveUserTokenCommand command);
         Task<OperationResult> ChangePassword(ChangeUserPasswordCommand command);
 
         Task<UserDto?> GetUserByPhoneNumber(string phoneNumber);

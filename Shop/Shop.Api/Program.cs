@@ -32,6 +32,8 @@ builder.Services.AddControllers()
     });
 
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddDistributedRedisCache(options => options.Configuration="localhost:6379");
+
 builder.Services.AddSwaggerGen(option =>
 {
     var jwtSecurityScheme = new OpenApiSecurityScheme
