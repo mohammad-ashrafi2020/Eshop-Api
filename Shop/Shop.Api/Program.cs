@@ -30,7 +30,10 @@ builder.Services.AddControllers()
             return new BadRequestObjectResult(result);
         });
     });
-
+builder.Services.AddDistributedRedisCache(option =>
+{
+    option.Configuration = "localhost:6379";
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
 {
