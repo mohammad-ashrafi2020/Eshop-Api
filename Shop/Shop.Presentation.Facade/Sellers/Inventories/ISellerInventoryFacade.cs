@@ -4,6 +4,7 @@ using Shop.Application.Sellers.AddInventory;
 using Shop.Application.Sellers.EditInventory;
 using Shop.Query.Sellers.DTOs;
 using Shop.Query.Sellers.Inventories.GetById;
+using Shop.Query.Sellers.Inventories.GetByProductId;
 using Shop.Query.Sellers.Inventories.GetList;
 
 namespace Shop.Presentation.Facade.Sellers.Inventories;
@@ -15,7 +16,7 @@ public interface ISellerInventoryFacade
 
     Task<InventoryDto?> GetById(long inventoryId);
     Task<List<InventoryDto>> GetList(long sellerId);
-
+    Task<List<InventoryDto>> GetByProductId(long productId);
 }
 
 internal class SellerInventoryFacade : ISellerInventoryFacade
@@ -45,5 +46,10 @@ internal class SellerInventoryFacade : ISellerInventoryFacade
     public async Task<List<InventoryDto>> GetList(long sellerId)
     {
         return await _mediator.Send(new GetInventoriesQuery(sellerId));
+    }
+
+    public async Task<List<InventoryDto>> GetByProductId(long productId)
+    {
+        return await _mediator.Send(new GetInventoriesByProductIdQuery(productId));
     }
 }

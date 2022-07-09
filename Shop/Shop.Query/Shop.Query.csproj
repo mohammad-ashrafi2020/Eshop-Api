@@ -28,6 +28,7 @@
     <Folder Include="Sellers\GetByUserId\" />
     <Folder Include="Sellers\Inventories\GetById\" />
     <Folder Include="Sellers\Inventories\GetList\" />
+    <Folder Include="Sellers\Inventories\GetByProductId\" />
     <Folder Include="SiteEntities\Banners\GetById\" />
     <Folder Include="SiteEntities\Banners\GetList\" />
     <Folder Include="SiteEntities\DTOs\" />

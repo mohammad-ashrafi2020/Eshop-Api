@@ -41,6 +41,7 @@ public class CategoryController : ApiController
         return QueryResult(result);
     }
     [HttpGet("getChild/{parentId}")]
+    [AllowAnonymous]
     public async Task<ApiResult<List<ChildCategoryDto>>> GetCategoriesByParentId(long parentId)
     {
         var result = await _categoryFacade.GetCategoriesByParentId(parentId);
