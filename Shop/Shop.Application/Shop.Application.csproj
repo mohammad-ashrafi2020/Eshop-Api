@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Categories\Remove\" />
+    <Folder Include="Comments\Delete\" />
     <Folder Include="Roles\Create\" />
     <Folder Include="Roles\Edit\" />
     <Folder Include="Sellers\Create\" />

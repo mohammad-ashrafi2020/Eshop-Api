@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using Shop.Api.Infrastructure.Security;
 using Shop.Application.Comments.ChangeStatus;
 using Shop.Application.Comments.Create;
+using Shop.Application.Comments.Delete;
 using Shop.Application.Comments.Edit;
+using Shop.Domain.CommentAgg;
 using Shop.Domain.RoleAgg.Enums;
 using Shop.Presentation.Facade.Comments;
 using Shop.Query.Comments.DTOs;
@@ -27,6 +29,18 @@ public class CommentController : ApiController
     public async Task<ApiResult<CommentFilterResult>> GetCommentByFilter([FromQuery] CommentFilterParams filterParams)
     {
         var result = await _commentFacade.GetCommentsByFilter(filterParams);
+        return QueryResult(result);
+    }
+    [HttpGet("productComments")]
+    public async Task<ApiResult<CommentFilterResult>> GetProductComments(int pageId = 1, int take = 10, int productId = 0)
+    {
+        var result = await _commentFacade.GetCommentsByFilter(new CommentFilterParams()
+        {
+            ProductId = productId,
+            PageId = pageId,
+            Take = take,
+            CommentStatus = CommentStatus.Accepted
+        });
         return QueryResult(result);
     }
 
@@ -59,6 +73,14 @@ public class CommentController : ApiController
     public async Task<ApiResult> ChangeCommentStatus(ChangeCommentStatusCommand command)
     {
         var result = await _commentFacade.ChangeStatus(command);
+        return CommandResult(result);
+    }
+
+    [HttpDelete("{commentId}")]
+    [Authorize]
+    public async Task<ApiResult> DeleteComment(long commentId)
+    {
+        var result = await _commentFacade.DeleteComment(new DeleteCommentCommand(commentId, User.GetUserId()));
         return CommandResult(result);
     }
 }

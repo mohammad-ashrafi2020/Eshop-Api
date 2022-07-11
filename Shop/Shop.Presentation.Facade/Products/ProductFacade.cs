@@ -78,13 +78,13 @@ internal class ProductFacade : IProductFacade
 
     public async Task<SingleProductDto?> GetProductBySlugForSinglePage(string slug)
     {
-        var product = await _mediator.Send(new GetProductBySlugQuery(slug));
-        if (product == null)
-            return null;
-
-        var inventories = await _inventoryFacade.GetByProductId(product.Id);
         return await _cache.GetOrSet(CacheKeys.Product(slug), async () =>
         {
+            var product = await _mediator.Send(new GetProductBySlugQuery(slug));
+            if (product == null)
+                return null;
+
+            var inventories = await _inventoryFacade.GetByProductId(product.Id);
             var model = new SingleProductDto()
             {
                 Inventories = inventories,

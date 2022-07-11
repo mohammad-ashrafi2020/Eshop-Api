@@ -9,5 +9,6 @@ namespace Shop.Domain.CommentAgg
 {
     public interface ICommentRepository : IBaseRepository<Comment>
     {
+        Task DeleteAndSave(Comment comment);
     }
 }
