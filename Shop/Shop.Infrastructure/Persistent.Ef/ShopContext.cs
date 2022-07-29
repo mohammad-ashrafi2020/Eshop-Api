@@ -27,6 +27,7 @@ public class ShopContext : DbContext
     public DbSet<Slider> Sliders { get; set; }
     public DbSet<Banner> Banners { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<ShippingMethod> ShippingMethods { get; set; }
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

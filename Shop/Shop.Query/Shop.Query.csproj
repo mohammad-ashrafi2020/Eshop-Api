@@ -32,6 +32,7 @@
     <Folder Include="SiteEntities\Banners\GetById\" />
     <Folder Include="SiteEntities\Banners\GetList\" />
     <Folder Include="SiteEntities\DTOs\" />
+    <Folder Include="SiteEntities\ShippingMethods\GetList\" />
     <Folder Include="SiteEntities\Sliders\GetById\" />
     <Folder Include="SiteEntities\Sliders\GetList\" />
     <Folder Include="Users\Addresses\GetById\" />

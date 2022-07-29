@@ -29,7 +29,7 @@ internal static class OrderMapper
     public static async Task<List<OrderItemDto>> GetOrderItems(this OrderDto orderDto, DapperContext dapperContext)
     {
         using var connection = dapperContext.CreateConnection();
-        var sql = @$"SELECT s.ShopName ,o.OrderId,o.InventoryId,o.Count,o.price,
+        var sql = @$"SELECT o.Id, s.ShopName ,o.OrderId,o.InventoryId,o.Count,o.price,
                           p.Title as ProductTitle , p.Slug as ProductSlug ,
                           p.ImageName as ProductImageName
                     FROM {dapperContext.OrderItems} o

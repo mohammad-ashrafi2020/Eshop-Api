@@ -16,6 +16,7 @@
     <Folder Include="Categories\" />
     <Folder Include="Comments\" />
     <Folder Include="Orders\" />
+    <Folder Include="Siteentities\ShippingMethods\" />
   </ItemGroup>
 
 </Project>

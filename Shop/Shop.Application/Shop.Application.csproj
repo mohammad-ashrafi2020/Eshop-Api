@@ -23,6 +23,9 @@
     <Folder Include="Sellers\Create\" />
     <Folder Include="Sellers\Edit\" />
     <Folder Include="Sellers\AddInventory\" />
+    <Folder Include="SiteEntities\ShippingMethods\Create\" />
+    <Folder Include="SiteEntities\ShippingMethods\Edit\" />
+    <Folder Include="SiteEntities\ShippingMethods\Delete\" />
     <Folder Include="SiteEntities\Sliders\Edit\" />
     <Folder Include="Users\Create\" />
     <Folder Include="Users\Edit\" />
