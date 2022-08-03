@@ -30,6 +30,7 @@
   <ItemGroup>
     <Folder Include="Infrastructure\JwtUtil\" />
     <Folder Include="ViewModels\Auth\" />
+    <Folder Include="ViewModels\Transactions\" />
     <Folder Include="ViewModels\Users\" />
   </ItemGroup>
 

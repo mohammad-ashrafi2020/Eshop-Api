@@ -15,6 +15,21 @@ public class OrderDto : BaseDto
     public OrderShippingMethod? ShippingMethod { get; set; }
     public List<OrderItemDto> Items { get; set; }
     public DateTime? LastUpdate { get; set; }
+
+
+    public int TotalPrice
+    {
+        get
+        {
+            var total = Items.Sum(s => s.TotalPrice);
+            if (Discount != null)
+            {
+                total -= Discount.DiscountAmount;
+            }
+            total += ShippingMethod?.ShippingCost ?? 0;
+            return total;
+        }
+    }
 }
 
 public class OrderItemDto : BaseDto
