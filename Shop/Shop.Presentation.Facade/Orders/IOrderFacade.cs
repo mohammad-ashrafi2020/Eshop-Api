@@ -2,6 +2,7 @@
 using Shop.Application.Orders.AddItem;
 using Shop.Application.Orders.Checkout;
 using Shop.Application.Orders.DecreaseItemCount;
+using Shop.Application.Orders.Finally;
 using Shop.Application.Orders.IncreaseItemCount;
 using Shop.Application.Orders.RemoveItem;
 using Shop.Query.Orders.DTOs;
@@ -15,6 +16,7 @@ public interface IOrderFacade
     Task<OperationResult> RemoveOrderItem(RemoveOrderItemCommand command);
     Task<OperationResult> IncreaseItemCount(IncreaseOrderItemCountCommand command);
     Task<OperationResult> DecreaseItemCount(DecreaseOrderItemCountCommand command);
+    Task<OperationResult> FinallyOrder(OrderFinallyCommand command);
 
 
 

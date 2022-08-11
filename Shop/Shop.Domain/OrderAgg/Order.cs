@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shop.Domain.OrderAgg.Events;
 
 namespace Shop.Domain.OrderAgg
 {
@@ -102,17 +103,24 @@ namespace Shop.Domain.OrderAgg
             currentItem.ChangeCount(newCount);
         }
 
+        public void Finally()
+        {
+            Status = OrderStatus.Finally;
+            LastUpdate=DateTime.Now;
+            AddDomainEvent(new OrderFinalized(Id));
+        }
         public void ChangeStatus(OrderStatus status)
         {
             Status = status;
             LastUpdate = DateTime.Now;
         }
 
-        public void Checkout(OrderAddress orderAddress)
+        public void Checkout(OrderAddress orderAddress,OrderShippingMethod shippingMethod)
         {
             ChangeOrderGuard();
 
             Address = orderAddress;
+            ShippingMethod = shippingMethod;
         }
 
         public void ChangeOrderGuard()

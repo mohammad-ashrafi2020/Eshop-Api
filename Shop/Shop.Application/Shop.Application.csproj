@@ -18,6 +18,8 @@
   <ItemGroup>
     <Folder Include="Categories\Remove\" />
     <Folder Include="Comments\Delete\" />
+    <Folder Include="Orders\Finally\" />
+    <Folder Include="Orders\_EvenHandlers\" />
     <Folder Include="Roles\Create\" />
     <Folder Include="Roles\Edit\" />
     <Folder Include="Sellers\Create\" />

@@ -3,6 +3,7 @@ using MediatR;
 using Shop.Application.Orders.AddItem;
 using Shop.Application.Orders.Checkout;
 using Shop.Application.Orders.DecreaseItemCount;
+using Shop.Application.Orders.Finally;
 using Shop.Application.Orders.IncreaseItemCount;
 using Shop.Application.Orders.RemoveItem;
 using Shop.Query.Orders.DTOs;
@@ -44,6 +45,12 @@ internal class OrderFacade : IOrderFacade
     public async Task<OperationResult> DecreaseItemCount(DecreaseOrderItemCountCommand command)
     {
         return await _mediator.Send(command);
+    }
+
+    public async Task<OperationResult> FinallyOrder(OrderFinallyCommand command)
+    {
+        return await _mediator.Send(command);
+
     }
 
     public async Task<OrderDto?> GetOrderById(long orderId)

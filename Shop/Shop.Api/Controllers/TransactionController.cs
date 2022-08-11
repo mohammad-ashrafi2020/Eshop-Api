@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shop.Api.Infrastructure.Gateways.Zibal;
 using Shop.Api.Infrastructure.Gateways.Zibal.DTOs;
 using Shop.Api.ViewModels.Transactions;
+using Shop.Application.Orders.Finally;
 using Shop.Presentation.Facade.Orders;
 
 namespace Shop.Api.Controllers
@@ -28,7 +29,7 @@ namespace Shop.Api.Controllers
         public async Task<ApiResult<string>> CreateTransaction(CreateTransactionViewModel command)
         {
             var order = await _orderFacade.GetOrderById(command.OrderId);
-            if (order == null)
+            if (order == null || order.Address == null || order.ShippingMethod == null)
                 return CommandResult(OperationResult<string>.NotFound());
 
 
@@ -36,7 +37,7 @@ namespace Shop.Api.Controllers
             var result = await _zibalService.StartPay(new ZibalPaymentRequest()
             {
                 Amount = order.TotalPrice,
-                CallBackUrl = $"{url}/transaction/Verify?orderId={order.Id}&errorRedirect={command.ErrorCallBackUrl}&successRedirect={command.SuccessCallBackUrl}",
+                CallBackUrl = $"{url}/api/transaction?orderId={order.Id}&errorRedirect={command.ErrorCallBackUrl}&successRedirect={command.SuccessCallBackUrl}",
                 Description = $"پرداخت سفارش با شناسه {order.Id}",
                 LinkToPay = false,
                 Merchant = "zibal",
@@ -54,17 +55,25 @@ namespace Shop.Api.Controllers
 
             var order = await _orderFacade.GetOrderById(orderId);
 
+
             if (order == null)
                 return Redirect(errorRedirect);
 
             var result = await _zibalService.Verify(new ZibalVeriyfyRequest(trackId, "zibal"));
 
+            //if (result.Status != 100)
+            //    return Redirect(errorRedirect);
+
+
             if (result.Amount != order.TotalPrice)
                 return Redirect(errorRedirect);
 
-            //OrderFinally
+            var commandResult = await _orderFacade.FinallyOrder(new OrderFinallyCommand(orderId));
 
-            return Redirect(successRedirect);
+            if (commandResult.Status == OperationResultStatus.Success)
+                return Redirect(successRedirect);
+
+            return Redirect(errorRedirect);
         }
     }
 }

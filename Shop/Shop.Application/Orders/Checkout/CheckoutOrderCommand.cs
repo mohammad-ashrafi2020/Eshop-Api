@@ -9,7 +9,7 @@ namespace Shop.Application.Orders.Checkout
 {
     public class CheckoutOrderCommand : IBaseCommand
     {
-        public CheckoutOrderCommand(long userId, string shire, string city, string postalCode, string postalAddress, string phoneNumber, string name, string family, string nationalCode)
+        public CheckoutOrderCommand(long userId, string shire, string city, string postalCode, string postalAddress, string phoneNumber, string name, string family, string nationalCode, long shippingMethodId)
         {
             UserId = userId;
             Shire = shire;
@@ -20,6 +20,7 @@ namespace Shop.Application.Orders.Checkout
             Name = name;
             Family = family;
             NationalCode = nationalCode;
+            ShippingMethodId = shippingMethodId;
         }
 
         public long UserId { get; private set; }
@@ -31,5 +32,6 @@ namespace Shop.Application.Orders.Checkout
         public string Name { get; private set; }
         public string Family { get; private set; }
         public string NationalCode { get; private set; }
+        public long ShippingMethodId { get; private set; }
     }
 }
