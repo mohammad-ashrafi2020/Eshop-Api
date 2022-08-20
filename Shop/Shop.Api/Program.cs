@@ -1,3 +1,4 @@
+using AspNetCoreRateLimit;
 using Common.Application;
 using Common.Application.FileUtil.Interfaces;
 using Common.Application.FileUtil.Services;
@@ -63,7 +64,7 @@ builder.Services.AddSwaggerGen(option =>
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.RegisterShopDependency(connectionString);
-builder.Services.RegisterApiDependency();
+builder.Services.RegisterApiDependency(builder.Configuration);
 
 CommonBootstrapper.Init(builder.Services);
 builder.Services.AddTransient<IFileService, FileService>();
@@ -74,7 +75,7 @@ var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
-
+app.UseIpRateLimiting();
 app.UseSwagger();
 app.UseSwaggerUI();
 
