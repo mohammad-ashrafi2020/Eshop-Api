@@ -47,6 +47,7 @@ public class OrderController : ApiController
         });
         return QueryResult(result);
     }
+
     [HttpGet("current")]
     public async Task<ApiResult<OrderDto?>> GetCurrentOrder()
     {
@@ -75,6 +76,12 @@ public class OrderController : ApiController
         return CommandResult(result);
     }
 
+    [HttpPut("SendOrder/{orderId}")]
+    public async Task<ApiResult> SendOrder(long orderId)
+    {
+        var result = await _orderFacade.SendOrder(orderId);
+        return CommandResult(result);
+    }
 
     [HttpPut("orderItem/IncreaseCount")]
     public async Task<ApiResult> IncreaseOrderItemCount(IncreaseOrderItemCountCommand command)

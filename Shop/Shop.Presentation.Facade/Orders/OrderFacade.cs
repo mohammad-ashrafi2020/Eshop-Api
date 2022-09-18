@@ -6,10 +6,12 @@ using Shop.Application.Orders.DecreaseItemCount;
 using Shop.Application.Orders.Finally;
 using Shop.Application.Orders.IncreaseItemCount;
 using Shop.Application.Orders.RemoveItem;
+using Shop.Application.Orders.SendOrder;
 using Shop.Query.Orders.DTOs;
 using Shop.Query.Orders.GetByFilter;
 using Shop.Query.Orders.GetById;
 using Shop.Query.Orders.GetCurrent;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Shop.Presentation.Facade.Orders;
 
@@ -50,6 +52,12 @@ internal class OrderFacade : IOrderFacade
     public async Task<OperationResult> FinallyOrder(OrderFinallyCommand command)
     {
         return await _mediator.Send(command);
+
+    }
+
+    public async Task<OperationResult> SendOrder(long orderId)
+    {
+        return await _mediator.Send(new SendOrderCommand(orderId));
 
     }
 
