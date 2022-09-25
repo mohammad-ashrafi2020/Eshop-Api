@@ -31,10 +31,7 @@ builder.Services.AddControllers()
             return new BadRequestObjectResult(result);
         });
     });
-builder.Services.AddDistributedRedisCache(option =>
-{
-    option.Configuration = "localhost:6379";
-});
+builder.Services.AddDistributedMemoryCache();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
 {
@@ -73,8 +70,10 @@ builder.Services.AddJwtAuthentication(builder.Configuration);
 
 var app = builder.Build();
 
-
-app.UseIpRateLimiting();
+//
+var dataSeeder = app.Services.GetRequiredService<DataSeeder>();
+await dataSeeder.SeedData();
+//
 app.UseSwagger();
 app.UseSwaggerUI();
 

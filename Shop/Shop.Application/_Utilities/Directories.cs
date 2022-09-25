@@ -16,5 +16,9 @@ namespace Shop.Application._Utilities
 
         public const string UserAvatars = "wwwroot/images/users/avatar";
 
+        public const string CategoryImages = "wwwroot/images/categories";
+        public const string BrandImages = "wwwroot/images/brands";
+
+
     }
 }

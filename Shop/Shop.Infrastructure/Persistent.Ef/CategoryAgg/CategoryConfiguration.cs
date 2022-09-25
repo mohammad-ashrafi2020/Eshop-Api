@@ -45,9 +45,6 @@ namespace Shop.Infrastructure.Persistent.Ef.CategoryAgg
              config.Property(b => b.Canonical)
                  .HasMaxLength(500)
                  .HasColumnName("Canonical");
-
-             config.Property(b => b.Schema)
-                 .HasColumnName("Schema");
          });
         }
     }

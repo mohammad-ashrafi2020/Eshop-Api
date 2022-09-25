@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="Persistent.Dapper\" />
     <Folder Include="Persistent.Ef\CommentAgg\" />
+    <Folder Include="Persistent.Ef\BrandAgg\" />
   </ItemGroup>
 
   <ItemGroup>

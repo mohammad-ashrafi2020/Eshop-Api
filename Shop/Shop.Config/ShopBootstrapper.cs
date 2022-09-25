@@ -13,6 +13,7 @@ using Shop.Domain.SellerAgg.Services;
 using Shop.Domain.UserAgg.Services;
 using Shop.Infrastructure;
 using Shop.Presentation.Facade;
+using Shop.Query;
 using Shop.Query.Categories.GetById;
 
 namespace Shop.Config
@@ -22,6 +23,7 @@ namespace Shop.Config
         public static void RegisterShopDependency(this IServiceCollection services,string connectionString)
         {
             InfrastructureBootstrapper.Init(services,connectionString);
+            QueryBootstrapper.Init(services,connectionString);
 
             services.AddMediatR(typeof(Directories).Assembly);
 

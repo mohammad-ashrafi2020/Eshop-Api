@@ -32,7 +32,9 @@ internal static class CommentMapper
             UserId = comment.UserId,
             ProductId = comment.ProductId,
             Text = comment.Text,
-
+            Disadvantages = comment.Disadvantages.Split("-"),
+            Advantages = comment.Advantages.Split("-"),
+            UserRecommendedStatus = comment.UserRecommendedStatus,
         };
     }
 }

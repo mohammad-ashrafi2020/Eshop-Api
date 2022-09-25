@@ -49,7 +49,7 @@ public class CategoryController : ApiController
     }
 
     [HttpPost]
-    public async Task<ApiResult<long>> CreateCategory(CreateCategoryCommand command)
+    public async Task<ApiResult<long>> CreateCategory([FromForm]CreateCategoryCommand command)
     {
         var result = await _categoryFacade.Create(command);
         var url = Url.Action("GetCategoryById", "Category", new {id = result.Data}, Request.Scheme);
@@ -63,7 +63,7 @@ public class CategoryController : ApiController
         return CommandResult(result, HttpStatusCode.Created, url);
     }
     [HttpPut]
-    public async Task<ApiResult> EditCategory(EditCategoryCommand command)
+    public async Task<ApiResult> EditCategory([FromForm]EditCategoryCommand command)
     {
         var result = await _categoryFacade.Edit(command);
         return CommandResult(result);

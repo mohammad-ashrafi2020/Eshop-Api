@@ -1,6 +1,7 @@
 ﻿using Common.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Shop.Domain.BrandAgg;
 using Shop.Domain.CategoryAgg;
 using Shop.Domain.CommentAgg;
 using Shop.Domain.OrderAgg;
@@ -31,6 +32,7 @@ public class ShopContext : DbContext
     public DbSet<Slider> Sliders { get; set; }
     public DbSet<Banner> Banners { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<Brand> Brands { get; set; }
     public DbSet<ShippingMethod> ShippingMethods { get; set; }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
@@ -65,6 +67,7 @@ public class ShopContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.HasDefaultSchema("dbo");
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ShopContext).Assembly);
         base.OnModelCreating(modelBuilder);
     }

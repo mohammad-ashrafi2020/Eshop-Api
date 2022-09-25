@@ -17,18 +17,20 @@ namespace Shop.Domain.CategoryAgg
         {
             Childs = new List<Category>();
         }
-        public Category(string title, string slug, SeoData seoData, ICategoryDomainService service)
+        public Category(string title, string slug, SeoData seoData, ICategoryDomainService service, string? imageName)
         {
-            slug = slug?.ToSlug();
+            slug = slug.ToSlug();
             Guard(title, slug, service);
             Title = title;
             Slug = slug;
             SeoData = seoData;
+            ImageName = imageName ?? "category.png";
             Childs = new List<Category>();
         }
 
         public string Title { get; private set; }
         public string Slug { get; private set; }
+        public string ImageName { get; private set; }
         public SeoData SeoData { get; private set; }
         public long? ParentId { get; private set; }
         public List<Category> Childs { get; private set; }
@@ -44,7 +46,7 @@ namespace Shop.Domain.CategoryAgg
 
         public void AddChild(string title, string slug, SeoData seoData, ICategoryDomainService service)
         {
-            Childs.Add(new Category(title, slug, seoData, service)
+            Childs.Add(new Category(title, slug, seoData, service, null)
             {
                 ParentId = Id
             });
@@ -58,6 +60,12 @@ namespace Shop.Domain.CategoryAgg
             if (slug != Slug)
                 if (service.IsSlugExist(slug))
                     throw new SlugIsDuplicateException();
+        }
+
+        public void SetImageName(string imageName)
+        {
+            if (string.IsNullOrWhiteSpace(imageName))
+                ImageName = imageName;
         }
     }
 }

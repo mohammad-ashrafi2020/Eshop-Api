@@ -41,6 +41,7 @@
     <Folder Include="Users\GetByPhoneNumber\" />
     <Folder Include="Users\DTOs\" />
     <Folder Include="Users\UserTokens\GetByJwtToken\" />
+    <Folder Include="_Context\Models\" />
   </ItemGroup>
 
   <ItemGroup>

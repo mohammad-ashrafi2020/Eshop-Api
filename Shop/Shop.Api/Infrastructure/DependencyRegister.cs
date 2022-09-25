@@ -13,7 +13,7 @@ public static class DependencyRegister
         service.AddAutoMapper(typeof(MapperProfile).Assembly);
         service.AddTransient<CustomJwtValidation>();
         service.AddHttpClient<IZibalService, ZibalService>();
-
+        service.AddTransient<DataSeeder>();
         service.AddCors(options =>
         {
             options.AddPolicy(name: "ShopApi",
@@ -25,16 +25,5 @@ public static class DependencyRegister
                 });
         });
         service.AddMemoryCache();
-
-        //load general configuration from appsettings.json
-        service.Configure<IpRateLimitOptions>(configuration.GetSection("IpRateLimiting"));
-
-        //load ip rules from appsettings.json
-        service.Configure<IpRateLimitPolicies>(configuration.GetSection("IpRateLimitPolicies"));
-
-        // inject counter and rules stores
-        service.AddInMemoryRateLimiting();
-
-        service.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
     }
 }

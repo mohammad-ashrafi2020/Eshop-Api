@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="BrandAgg\" />
     <Folder Include="OrderAgg\Events\" />
     <Folder Include="SellerAgg\Services\" />
   </ItemGroup>

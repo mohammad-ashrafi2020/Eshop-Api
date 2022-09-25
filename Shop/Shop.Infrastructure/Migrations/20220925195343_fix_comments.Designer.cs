@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shop.Infrastructure.Persistent.Ef;
 
@@ -11,9 +12,10 @@ using Shop.Infrastructure.Persistent.Ef;
 namespace Shop.Infrastructure.Migrations
 {
     [DbContext(typeof(ShopContext))]
-    partial class ShopContextModelSnapshot : ModelSnapshot
+    [Migration("20220925195343_fix_comments")]
+    partial class fix_comments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,30 +24,6 @@ namespace Shop.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("Shop.Domain.BrandAgg.Brand", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ImageName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Brands", "dbo");
-                });
 
             modelBuilder.Entity("Shop.Domain.CategoryAgg.Category", b =>
                 {
@@ -57,10 +35,6 @@ namespace Shop.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("ImageName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long?>("ParentId")
                         .HasColumnType("bigint");
@@ -165,9 +139,6 @@ namespace Shop.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<long>("BrandId")
-                        .HasColumnType("bigint");
-
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
 
@@ -182,10 +153,6 @@ namespace Shop.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(110)
                         .HasColumnType("nvarchar(110)");
-
-                    b.Property<string>("Introduction")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long?>("SecondarySubCategoryId")
                         .HasColumnType("bigint");
@@ -442,6 +409,10 @@ namespace Shop.Infrastructure.Migrations
                                 .HasColumnType("nvarchar(500)")
                                 .HasColumnName("MetaTitle");
 
+                            b1.Property<string>("Schema")
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Schema");
+
                             b1.HasKey("CategoryId");
 
                             b1.ToTable("Categories", "dbo");
@@ -635,6 +606,10 @@ namespace Shop.Infrastructure.Migrations
                                 .HasMaxLength(500)
                                 .HasColumnType("nvarchar(500)")
                                 .HasColumnName("MetaTitle");
+
+                            b1.Property<string>("Schema")
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Schema");
 
                             b1.HasKey("ProductId");
 

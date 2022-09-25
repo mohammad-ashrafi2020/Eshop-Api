@@ -25,7 +25,7 @@ namespace Shop.Application.Products.Create
             var imageName = await _fileService.SaveFileAndGenerateName(request.ImageFile, Directories.ProductImages);
             var product = new Product(request.Title, imageName, request.Description, request.CategoryId,
                 request.SubCategoryId, request.SecondarySubCategoryId, _domainService, request.Slug,
-                request.SeoData);
+                request.SeoData,request.Introduction,request.BrandId);
 
             _repository.Add(product);
 

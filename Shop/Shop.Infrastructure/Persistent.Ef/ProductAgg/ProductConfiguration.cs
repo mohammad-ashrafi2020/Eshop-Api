@@ -46,8 +46,6 @@ public class ProductConfiguration:IEntityTypeConfiguration<Product>
                 .HasMaxLength(500)
                 .HasColumnName("Canonical");
 
-            config.Property(b => b.Schema)
-                .HasColumnName("Schema");
         });
 
         builder.OwnsMany(b => b.Images, option =>
