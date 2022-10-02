@@ -56,6 +56,7 @@ public class CommentController : ApiController
     [Authorize]
     public async Task<ApiResult> CreateComment(CreateCommentCommand command)
     {
+        command.UserId = User.GetUserId();
         var result = await _commentFacade.CreateComment(command);
         return CommandResult(result);
     }

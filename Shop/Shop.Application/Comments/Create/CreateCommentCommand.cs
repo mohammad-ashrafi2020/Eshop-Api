@@ -8,6 +8,15 @@ using System.Threading.Tasks;
 
 namespace Shop.Application.Comments.Create
 {
-    public record CreateCommentCommand(string Text, long UserId, long ProductId,
-        string Disadvantages, string Advantages, UserRecommendedStatus UserRecommendedStatus, decimal Rate = 0) : IBaseCommand;
+    public class CreateCommentCommand : IBaseCommand
+    {
+        public long UserId { get; set; }
+        public long ProductId { get; set; }
+        public string Text { get; set; }
+        public string Disadvantages { get; set; }
+        public string Advantages { get; set; }
+        public UserRecommendedStatus UserRecommendedStatus { get; set; }
+        public decimal Rate { get; set; } = 0;
+
+    };
 }

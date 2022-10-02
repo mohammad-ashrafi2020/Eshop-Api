@@ -31,8 +31,11 @@
   <ItemGroup>
     <Folder Include="Infrastructure\JwtUtil\" />
     <Folder Include="ViewModels\Auth\" />
+    <Folder Include="ViewModels\Comments\" />
     <Folder Include="ViewModels\Transactions\" />
     <Folder Include="ViewModels\Users\" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1development_1json__JsonSchema="https://datahubproject.io/schemas/datahub_ingestion_schema.json" /></VisualStudio></ProjectExtensions>
 
 </Project>
