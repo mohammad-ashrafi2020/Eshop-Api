@@ -1,4 +1,5 @@
-﻿using Common.Query;
+﻿using System.Text.Json.Serialization;
+using Common.Query;
 using Common.Query.Filter;
 using Shop.Query.Categories.DTOs;
 
@@ -9,15 +10,17 @@ public class ProductShopResult : BaseFilter<ProductShopDto, ProductShopFilterPar
     public CategoryDto? CategoryDto { get; set; }
 }
 
-public class ProductShopDto : BaseDto
+public class ProductShopDto
 {
+    public long Id { get; set; }
     public string Title { get; set; }
     public string Slug { get; set; }
     public long InventoryId { get; set; }
     public int Price { get; set; }
     public int DiscountPercentage { get; set; }
     public string ImageName { get; set; }
-
+    public string Rate { get; set; }
+    public int CommentCount { get; set; }
     public int TotalPrice
     {
         get

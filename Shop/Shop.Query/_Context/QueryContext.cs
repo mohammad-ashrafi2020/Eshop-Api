@@ -17,6 +17,9 @@ class QueryContext : DbContext
     public DbSet<CommentQueryModel> Comments { get; set; }
     public DbSet<UserQueryModel> Users { get; set; }
     public DbSet<ProductQueryModel> Products { get; set; }
+    public DbSet<InventoryQueryModel> Inventories { get; set; }
+    public DbSet<SellerQueryModel> Seller { get; set; }
+    public DbSet<CategoryQueryModel> Categories { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -27,6 +30,30 @@ class QueryContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("dbo");
+
+        modelBuilder.Entity<CategoryQueryModel>()
+            .OwnsOne(b => b.SeoData, config =>
+            {
+                config.Property(b => b.MetaDescription)
+                    .HasMaxLength(500)
+                    .HasColumnName("MetaDescription");
+
+                config.Property(b => b.MetaTitle)
+                    .HasMaxLength(500)
+                    .HasColumnName("MetaTitle");
+
+                config.Property(b => b.MetaKeyWords)
+                    .HasMaxLength(500)
+                    .HasColumnName("MetaKeyWords");
+
+                config.Property(b => b.IndexPage)
+                    .HasColumnName("IndexPage");
+
+                config.Property(b => b.Canonical)
+                    .HasMaxLength(500)
+                    .HasColumnName("Canonical");
+            }); ;
+
         base.OnModelCreating(modelBuilder);
     }
 }

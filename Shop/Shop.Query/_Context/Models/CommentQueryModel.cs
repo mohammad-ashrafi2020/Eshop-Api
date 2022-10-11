@@ -25,16 +25,3 @@ class CommentQueryModel : BaseDto
     public UserQueryModel User { get; set; }
     public ProductQueryModel Product { get; set; }
 }
-
-[Table("Products", Schema = "product")]
-class ProductQueryModel : BaseDto
-{
-    public string Title { get; private set; }
-    public string ImageName { get; private set; }
-}
-[Table("Users", Schema = "user")]
-class UserQueryModel : BaseDto
-{
-    public string Name { get; set; }
-    public string Family { get; set; }
-}

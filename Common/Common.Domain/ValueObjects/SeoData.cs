@@ -4,7 +4,7 @@ namespace Common.Domain.ValueObjects
 {
     public class SeoData : ValueObject
     {
-        private SeoData()
+        public SeoData()
         {
         }
 
@@ -22,10 +22,10 @@ namespace Common.Domain.ValueObjects
             Canonical = canonical;
         }
 
-        public string? MetaTitle { get; private set; }
-        public string? MetaDescription { get; private set; }
-        public string? MetaKeyWords { get; private set; }
-        public bool IndexPage { get; private set; } = true;
-        public string? Canonical { get; private set; }
+        public string? MetaTitle { get;  set; }
+        public string? MetaDescription { get;  set; }
+        public string? MetaKeyWords { get;  set; }
+        public bool IndexPage { get;  set; } = true;
+        public string? Canonical { get;  set; }
     }
 }

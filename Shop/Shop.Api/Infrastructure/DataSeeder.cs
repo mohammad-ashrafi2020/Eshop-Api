@@ -37,9 +37,9 @@ public class DataSeeder
         }
         catch
         {
-
+            return;
         }
-        var user = await _context.Users.AnyAsync(f => f.Email == "admin@admin.com");
+        var user = await _context.Users.AnyAsync(f => f.PhoneNumber == "09170000000");
         if (user)
             return;
 

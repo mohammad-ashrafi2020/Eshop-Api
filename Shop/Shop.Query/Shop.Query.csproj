@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Brands\GetList\" />
+    <Folder Include="Brands\GetById\" />
+    <Folder Include="Brands\DTOs\" />
     <Folder Include="Categories\GetById\" />
     <Folder Include="Categories\GetList\" />
     <Folder Include="Categories\DTOs\" />

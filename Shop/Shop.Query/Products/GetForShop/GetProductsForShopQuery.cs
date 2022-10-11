@@ -26,7 +26,6 @@ internal class GetProductsForShopQueryHandler : IQueryHandler<GetProductsForShop
         _dapperContext = dapperContext;
         _context = context;
     }
-
     public async Task<ProductShopResult> Handle(GetProductsForShopQuery request, CancellationToken cancellationToken)
     {
         var @params = request.FilterParams;
@@ -98,11 +97,11 @@ internal class GetProductsForShopQueryHandler : IQueryHandler<GetProductsForShop
         var resultSql = @$"SELECT A.Slug,A.Id ,A.Title,A.Price,A.InventoryId,A.DiscountPercentage,A.ImageName
             FROM (Select p.Title , i.Price  , i.Id as InventoryId , i.DiscountPercentage,p.ImageName , i.Count,
                         p.CategoryId,p.SubCategoryId,p.SecondarySubCategoryId, p.Slug , p.Id as Id , s.Status
-                            ,ROW_NUMBER() OVER(PARTITION BY p.Id ORDER BY {inventoryOrderBy}) AS RN
+                            ,ROW_NUMBER() OVER(PARTITION BY p.Id ORDER BY {inventoryOrderBy}  ) AS RN
             From {_dapperContext.Products} p
             left join {_dapperContext.Inventories} i on p.Id=i.ProductId
             left join {_dapperContext.Sellers} s on i.SellerId=s.Id)A
-            WHERE  A.RN = 1 and A.Status=@status  {conditions} order By {orderBy} offset @skip ROWS FETCH NEXT @take ROWS ONLY";
+            WHERE  A.RN = 1 and A.Status=@status  {conditions}  order By {orderBy} offset @skip ROWS FETCH NEXT @take ROWS ONLY";
 
         var count = await sqlConnection.QueryFirstAsync<int>(sql, new { status = SellerStatus.Accepted });
         var result = await sqlConnection.QueryAsync<ProductShopDto>(resultSql,
@@ -114,6 +113,23 @@ internal class GetProductsForShopQueryHandler : IQueryHandler<GetProductsForShop
             CategoryDto = selectedCategory
         };
         model.GeneratePaging(count, @params.Take, @params.PageId);
+        await GenerateProductRate(model);
         return model;
+    }
+
+    private async Task GenerateProductRate(ProductShopResult model)
+    {
+        //This Is The Bad Function
+        //Use Just For Test
+        foreach (var product in model.Data)
+        {
+            var sql = $"select AVG(Rate) from {_dapperContext.Comments} where ProductId=@productId";
+            var countSql = $"select Count(ProductId) from {_dapperContext.Comments} where ProductId=@productId";
+            using var sqlConnection = _dapperContext.CreateConnection();
+            var res = await sqlConnection.QueryFirstAsync<decimal?>(sql, new { productId = product.Id });
+            var resCount = await sqlConnection.QueryFirstAsync<int>(countSql, new { productId = product.Id });
+            product.Rate = (res ?? (decimal)5.0).ToString("##.###");
+            product.CommentCount = resCount;
+        }
     }
 }
