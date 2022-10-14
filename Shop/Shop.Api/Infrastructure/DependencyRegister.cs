@@ -19,9 +19,10 @@ public static class DependencyRegister
             options.AddPolicy(name: "ShopApi",
                 builder =>
                 {
-                    builder.AllowAnyOrigin()
+                    builder.WithOrigins("http://localhost:3000", "https://localhost:3000")
                         .AllowAnyMethod()
-                        .AllowAnyHeader();
+                        .AllowAnyHeader()
+                        .AllowCredentials();
                 });
         });
         service.AddMemoryCache();

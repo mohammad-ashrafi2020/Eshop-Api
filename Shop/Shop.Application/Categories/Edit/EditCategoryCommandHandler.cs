@@ -29,7 +29,7 @@ namespace Shop.Application.Categories.Edit
             if (request.ImageFile.IsImage())
             {
                 var imageName =
-                    await _fileService.SaveFileAndGenerateName(request.ImageFile, Directories.CategoryImages);
+                    await _fileService.SaveFileAndGenerateName(request.ImageFile!, Directories.CategoryImages);
                 category.SetImageName(imageName);
             }
             await _repository.Save();

@@ -44,9 +44,9 @@ namespace Shop.Domain.CategoryAgg
             SeoData = seoData;
         }
 
-        public void AddChild(string title, string slug, SeoData seoData, ICategoryDomainService service)
+        public void AddChild(string title, string slug,string? imageName, SeoData seoData, ICategoryDomainService service)
         {
-            Childs.Add(new Category(title, slug, seoData, service, null)
+            Childs.Add(new Category(title, slug, seoData, service, imageName)
             {
                 ParentId = Id
             });

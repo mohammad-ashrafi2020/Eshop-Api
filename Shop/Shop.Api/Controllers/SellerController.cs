@@ -49,7 +49,7 @@ public class SellerController : ApiController
     }
 
     [HttpPost]
-    [PermissionChecker(Permission.Seller_Management)]
+    [Authorize]
     public async Task<ApiResult> CreateSeller(CreateSellerCommand command)
     {
         var result = await _sellerFacade.CreateSeller(command);

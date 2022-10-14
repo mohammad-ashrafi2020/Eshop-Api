@@ -17,6 +17,7 @@ internal static class CategoryMapper
             Id = category.Id,
             SeoData = category.SeoData,
             CreationDate = category.CreationDate,
+            ImageName=category.ImageName,
             Childs = category.Childs.MapChildren()
         };
     }

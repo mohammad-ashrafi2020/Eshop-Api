@@ -77,7 +77,7 @@ public class DataSeeder
         _context.Add(category);
         await _context.SaveChangesAsync();
 
-        category.AddChild("گوشی موبایل", "mobile-phone",
+        category.AddChild("گوشی موبایل", "mobile-phone",null,
             new SeoData("کالای دیجیتال", "کالای دیجیتال", "کالای دیجیتال", true, null),
             _categoryDomainService);
         _context.Update(category);
