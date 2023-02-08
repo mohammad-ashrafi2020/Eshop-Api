@@ -22,6 +22,7 @@
     <Folder Include="Products\GetById\" />
     <Folder Include="Products\GetBySlug\" />
     <Folder Include="Products\GetForShop\" />
+    <Folder Include="Products\GetForSinglePage\" />
     <Folder Include="Roles\GetById\" />
     <Folder Include="Roles\GetList\" />
     <Folder Include="Roles\DTOs\" />

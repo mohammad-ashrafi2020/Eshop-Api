@@ -7,6 +7,7 @@ namespace Shop.Query.Products;
 
 public static class ProductMapper
 {
+    
     public static ProductDto? Map(this Product? product)
     {
         if (product == null)

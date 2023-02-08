@@ -15,11 +15,6 @@ class QueryContext : DbContext
     }
 
     public DbSet<CommentQueryModel> Comments { get; set; }
-    public DbSet<UserQueryModel> Users { get; set; }
-    public DbSet<ProductQueryModel> Products { get; set; }
-    public DbSet<InventoryQueryModel> Inventories { get; set; }
-    public DbSet<SellerQueryModel> Seller { get; set; }
-    public DbSet<CategoryQueryModel> Categories { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

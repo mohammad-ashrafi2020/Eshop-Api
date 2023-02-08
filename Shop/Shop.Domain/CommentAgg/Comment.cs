@@ -35,7 +35,7 @@ namespace Shop.Domain.CommentAgg
             Advantages = advantages;
             Disadvantages = disadvantages;
             Rate = rate;
-            Status = CommentStatus.Pending;
+            Status = CommentStatus.Accepted;
             UserRecommendedStatus = userRecommended;
         }
 

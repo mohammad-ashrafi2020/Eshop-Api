@@ -25,6 +25,7 @@ namespace Shop.Application.Categories.AddChild
             var category = await _repository.GetTracking(request.ParentId);
             if (category == null)
                 return OperationResult<long>.NotFound();
+
             if (request.ImageFile.IsImage() == false)
                 return OperationResult<long>.Error("عکس نامعتبراست");
 

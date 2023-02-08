@@ -20,6 +20,7 @@ public class ProductShopDto
     public int DiscountPercentage { get; set; }
     public string ImageName { get; set; }
     public string Rate { get; set; }
+    public string ShopName { get; set; }
     public int CommentCount { get; set; }
     public int TotalPrice
     {
@@ -36,6 +37,8 @@ public class ProductShopFilterParam : BaseFilterParam
     public string? Search { get; set; } = "";
     public bool OnlyAvailableProducts { get; set; } = false;
     public bool JustHasDiscount { get; set; } = false;
+    public int StartPrice { get; set; }
+    public int EndPrice { get; set; }
     public ProductSearchOrderBy SearchOrderBy { get; set; } = ProductSearchOrderBy.Cheapest;
 }
 

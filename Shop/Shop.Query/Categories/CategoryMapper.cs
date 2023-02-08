@@ -34,7 +34,8 @@ internal static class CategoryMapper
                 Id = category.Id,
                 SeoData = category.SeoData,
                 CreationDate = category.CreationDate,
-                Childs = category.Childs.MapChildren()
+                Childs = category.Childs.MapChildren(),
+                ImageName = category.ImageName,
             });
         });
 
@@ -55,7 +56,9 @@ internal static class CategoryMapper
                 SeoData = c.SeoData,
                 CreationDate = c.CreationDate,
                 ParentId = (long)c.ParentId,
-                Childs = c.Childs.MapSecondaryChild()
+                Childs = c.Childs.MapSecondaryChild(),
+                ImageName = c.ImageName,
+
             });
         });
         return model;
@@ -74,6 +77,7 @@ internal static class CategoryMapper
                 SeoData = c.SeoData,
                 CreationDate = c.CreationDate,
                 ParentId = (long)c.ParentId,
+                ImageName = c.ImageName,
             });
         });
         return model;

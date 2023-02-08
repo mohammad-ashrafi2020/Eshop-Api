@@ -12,6 +12,7 @@ using Shop.Query.Products.GetByFilter;
 using Shop.Query.Products.GetById;
 using Shop.Query.Products.GetBySlug;
 using Shop.Query.Products.GetForShop;
+using Shop.Query.Products.GetForSinglePage;
 
 namespace Shop.Presentation.Facade.Products;
 
@@ -19,12 +20,10 @@ internal class ProductFacade : IProductFacade
 {
     private readonly IMediator _mediator;
     private readonly IDistributedCache _cache;
-    private readonly ISellerInventoryFacade _inventoryFacade;
-    public ProductFacade(IMediator mediator, IDistributedCache cache, ISellerInventoryFacade inventoryFacade)
+    public ProductFacade(IMediator mediator, IDistributedCache cache)
     {
         _mediator = mediator;
         _cache = cache;
-        _inventoryFacade = inventoryFacade;
     }
 
     public async Task<OperationResult> CreateProduct(CreateProductCommand command)
@@ -70,28 +69,14 @@ internal class ProductFacade : IProductFacade
 
     public async Task<ProductDto?> GetProductBySlug(string slug)
     {
-        return await _cache.GetOrSet(CacheKeys.Product(slug), () =>
-        {
-            return _mediator.Send(new GetProductBySlugQuery(slug));
-        });
+        return await _cache.GetOrSet(CacheKeys.Product(slug),
+            () => _mediator.Send(new GetProductBySlugQuery(slug)));
     }
 
-    public async Task<SingleProductDto?> GetProductBySlugForSinglePage(string slug)
+    public async Task<SinglePageProductDto?> GetProductBySlugForSinglePage(string slug)
     {
-        return await _cache.GetOrSet(CacheKeys.Product(slug), async () =>
-        {
-            var product = await _mediator.Send(new GetProductBySlugQuery(slug));
-            if (product == null)
-                return null;
-
-            var inventories = await _inventoryFacade.GetByProductId(product.Id);
-            var model = new SingleProductDto()
-            {
-                Inventories = inventories,
-                ProductDto = product
-            };
-            return model;
-        });
+        return await _cache.GetOrSet(CacheKeys.Product(slug),
+            () => _mediator.Send(new GetProductForSinglePageQuery(slug)));
     }
 
     public async Task<ProductFilterResult> GetProductsByFilter(ProductFilterParams filterParams)

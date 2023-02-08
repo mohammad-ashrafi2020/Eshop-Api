@@ -81,6 +81,17 @@ internal class GetProductsForShopQueryHandler : IQueryHandler<GetProductsForShop
                 orderBy = "p.Id";
                 break;
         }
+        if (@params.StartPrice > 0)
+        {
+            conditions += $"and A.Price >= {@params.StartPrice}";
+
+        }
+
+        if (@params.EndPrice > 0 && @params.EndPrice >= @params.StartPrice)
+        {
+            conditions += $"and A.Price <= {@params.EndPrice}";
+
+        }
         using var sqlConnection = _dapperContext.CreateConnection();
 
         var skip = (@params.PageId - 1) * @params.Take;
@@ -94,9 +105,9 @@ internal class GetProductsForShopQueryHandler : IQueryHandler<GetProductsForShop
             WHERE  A.RN = 1 and A.Status=@status  {conditions}";
 
 
-        var resultSql = @$"SELECT A.Slug,A.Id ,A.Title,A.Price,A.InventoryId,A.DiscountPercentage,A.ImageName
+        var resultSql = @$"SELECT A.Slug,A.Id ,A.Title,A.Price,A.InventoryId,A.DiscountPercentage,A.ImageName,A.ShopName
             FROM (Select p.Title , i.Price  , i.Id as InventoryId , i.DiscountPercentage,p.ImageName , i.Count,
-                        p.CategoryId,p.SubCategoryId,p.SecondarySubCategoryId, p.Slug , p.Id as Id , s.Status
+                        p.CategoryId,p.SubCategoryId,p.SecondarySubCategoryId, p.Slug , p.Id as Id , s.Status,s.ShopName
                             ,ROW_NUMBER() OVER(PARTITION BY p.Id ORDER BY {inventoryOrderBy}  ) AS RN
             From {_dapperContext.Products} p
             left join {_dapperContext.Inventories} i on p.Id=i.ProductId

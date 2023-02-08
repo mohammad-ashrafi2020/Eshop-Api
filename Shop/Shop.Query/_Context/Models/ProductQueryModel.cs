@@ -16,12 +16,6 @@ class ProductQueryModel : BaseDto
     public long? SecondarySubCategoryId { get; set; }
     public long BrandId { get; set; }
     public string Slug { get; set; }
-
-    public List<CommentQueryModel> Comments { get; set; }
-    public List<InventoryQueryModel> Inventories { get; set; }
-    public CategoryQueryModel Category { get; set; }
-    public CategoryQueryModel SubCategory { get; set; }
-    public CategoryQueryModel? SecondarySubCategory { get; set; }
 }
 [Table("Categories", Schema = "dbo")]
 class CategoryQueryModel:BaseDto

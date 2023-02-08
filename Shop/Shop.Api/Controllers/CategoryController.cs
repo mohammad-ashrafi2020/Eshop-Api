@@ -44,21 +44,21 @@ public class CategoryController : ApiController
     }
 
     [HttpPost]
-    public async Task<ApiResult<long>> CreateCategory([FromForm]CreateCategoryCommand command)
+    public async Task<ApiResult<long>> CreateCategory([FromForm] CreateCategoryCommand command)
     {
         var result = await _categoryFacade.Create(command);
-        var url = Url.Action("GetCategoryById", "Category", new {id = result.Data}, Request.Scheme);
-        return CommandResult(result,HttpStatusCode.Created,url);
+        var url = Url.Action("GetCategoryById", "Category", new { id = result.Data }, Request.Scheme);
+        return CommandResult(result, HttpStatusCode.Created, url);
     }
     [HttpPost("AddChild")]
-    public async Task<ApiResult<long>> CreateCategory(AddChildCategoryCommand command)
+    public async Task<ApiResult<long>> CreateCategory([FromForm] AddChildCategoryCommand command)
     {
         var result = await _categoryFacade.AddChild(command);
         var url = Url.Action("GetCategoryById", "Category", new { id = result.Data }, Request.Scheme);
         return CommandResult(result, HttpStatusCode.Created, url);
     }
     [HttpPut]
-    public async Task<ApiResult> EditCategory([FromForm]EditCategoryCommand command)
+    public async Task<ApiResult> EditCategory([FromForm] EditCategoryCommand command)
     {
         var result = await _categoryFacade.Edit(command);
         return CommandResult(result);

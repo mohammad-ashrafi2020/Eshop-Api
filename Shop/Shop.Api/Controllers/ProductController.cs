@@ -54,7 +54,7 @@ public class ProductController : ApiController
 
     [AllowAnonymous]
     [HttpGet("single/{slug}")]
-    public async Task<ApiResult<SingleProductDto?>> GetSingleProduct(string slug)
+    public async Task<ApiResult<SinglePageProductDto?>> GetSingleProduct(string slug)
     {
         var product = await _productFacade.GetProductBySlugForSinglePage(slug);
         return QueryResult(product);
