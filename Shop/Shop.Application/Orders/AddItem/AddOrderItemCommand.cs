@@ -11,7 +11,7 @@ public class AddOrderItemCommand : IBaseCommand
         UserId = userId;
     }
 
-    public long InventoryId { get; private set; }
-    public int Count { get; private set; }
-    public long UserId { get; private set; }
+    public long InventoryId { get;  set; }
+    public int Count { get;  set; }
+    public long UserId { get;  set; }
 }

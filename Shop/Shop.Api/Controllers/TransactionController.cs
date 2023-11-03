@@ -36,7 +36,9 @@ namespace Shop.Api.Controllers
             var url = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
             var result = await _zibalService.StartPay(new ZibalPaymentRequest()
             {
-                Amount = order.TotalPrice,
+
+                //Convert Tooman TO Rial
+                Amount = order.TotalPrice*10,
                 CallBackUrl = $"{url}/api/transaction?orderId={order.Id}&errorRedirect={command.ErrorCallBackUrl}&successRedirect={command.SuccessCallBackUrl}",
                 Description = $"پرداخت سفارش با شناسه {order.Id}",
                 LinkToPay = false,
@@ -65,7 +67,8 @@ namespace Shop.Api.Controllers
             //    return Redirect(errorRedirect);
 
 
-            if (result.Amount != order.TotalPrice)
+            //Convert Tooman TO Rial
+            if (result.Amount != order.TotalPrice*10)
                 return Redirect(errorRedirect);
 
             var commandResult = await _orderFacade.FinallyOrder(new OrderFinallyCommand(orderId));

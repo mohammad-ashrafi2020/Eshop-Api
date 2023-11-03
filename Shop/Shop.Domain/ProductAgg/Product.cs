@@ -19,7 +19,6 @@ namespace Shop.Domain.ProductAgg
 
         public string Title { get; private set; }
         public string ImageName { get; private set; }
-        public string Introduction { get; private set; }
         public string Description { get; private set; }
         public long CategoryId { get; private set; }
         public long SubCategoryId { get; private set; }
@@ -32,7 +31,7 @@ namespace Shop.Domain.ProductAgg
 
         public Product(string title, string imageName, string description, long categoryId,
            long subCategoryId, long? secondarySubCategoryId, IProductDomainService domainService,
-           string slug, SeoData seoData, string introduction, long brandId)
+           string slug, SeoData seoData, long brandId)
         {
             NullOrEmptyDomainDataException.CheckString(imageName, nameof(imageName));
             Guard(title, slug, description, domainService);
@@ -45,7 +44,6 @@ namespace Shop.Domain.ProductAgg
             SecondarySubCategoryId = secondarySubCategoryId;
             Slug = slug.ToSlug();
             SeoData = seoData;
-            Introduction = introduction;
             BrandId = brandId;
         }
 

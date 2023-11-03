@@ -65,6 +65,7 @@ public class OrderController : ApiController
     [HttpPost]
     public async Task<ApiResult> AddOrderItem(AddOrderItemCommand command)
     {
+        command.UserId = User.GetUserId();
         var result = await _orderFacade.AddOrderItem(command);
         return CommandResult(result);
     }
@@ -72,6 +73,7 @@ public class OrderController : ApiController
     [HttpPost("Checkout")]
     public async Task<ApiResult> CheckoutOrder(CheckoutOrderCommand command)
     {
+        command.UserId = User.GetUserId();
         var result = await _orderFacade.OrderCheckOut(command);
         return CommandResult(result);
     }
@@ -86,13 +88,15 @@ public class OrderController : ApiController
     [HttpPut("orderItem/IncreaseCount")]
     public async Task<ApiResult> IncreaseOrderItemCount(IncreaseOrderItemCountCommand command)
     {
-        var result = await _orderFacade.IncreaseItemCount(command);
+
+        var result = await _orderFacade.IncreaseItemCount(command with { UserId = User.GetUserId() });
         return CommandResult(result);
     }
     [HttpPut("orderItem/DecreaseCount")]
     public async Task<ApiResult> DecreaseOrderItemCount(DecreaseOrderItemCountCommand command)
     {
-        var result = await _orderFacade.DecreaseItemCount(command);
+
+        var result = await _orderFacade.DecreaseItemCount(command with { UserId = User.GetUserId() });
         return CommandResult(result);
     }
 

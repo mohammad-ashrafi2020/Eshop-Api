@@ -9,7 +9,6 @@ class ProductQueryModel : BaseDto
 {
     public string Title { get; set; }
     public string ImageName { get; set; }
-    public string Introduction { get; set; }
     public string Description { get; set; }
     public long CategoryId { get; set; }
     public long SubCategoryId { get; set; }

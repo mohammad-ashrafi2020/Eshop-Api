@@ -77,7 +77,7 @@ public class DataSeeder
         _context.Add(category);
         await _context.SaveChangesAsync();
 
-        category.AddChild("گوشی موبایل", "mobile-phone",null,
+        category.AddChild("گوشی موبایل", "mobile-phone", null,
             new SeoData("کالای دیجیتال", "کالای دیجیتال", "کالای دیجیتال", true, null),
             _categoryDomainService);
         _context.Update(category);
@@ -86,8 +86,8 @@ public class DataSeeder
         var product = new Product("گوشی موبایل سامسونگ مدل Galaxy A13 SM-A137F/DS", "mobile.png", "test"
             , category.Id, category.Childs.First().Id, null, _productDomainService, "Galaxy-A13"
             , new SeoData("گوشی موبایل سامسونگ", "گوشی موبایل سامسونگ",
-                "گوشی موبایل سامسونگ مدل Galaxy A13 SM-A137F/DS", true, null),
-            "test", brand.Id);
+                "گوشی موبایل سامسونگ مدل Galaxy A13 SM-A137F/DS", true, null)
+            , brand.Id);
         _context.Add(product);
         await _context.SaveChangesAsync();
     }
