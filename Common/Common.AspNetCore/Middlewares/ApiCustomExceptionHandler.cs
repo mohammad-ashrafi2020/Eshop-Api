@@ -56,6 +56,13 @@ public class ApiCustomExceptionHandlerMiddleware
             SetErrorMessage(exception);
             await WriteToResponseAsync();
         }
+        catch (BadRequestException exception)
+        {
+            _logger.LogError(exception, exception.Message);
+            httpStatusCode = HttpStatusCode.BadRequest;
+            SetErrorMessage(exception);
+            await WriteToResponseAsync();
+        }
         catch (Exception exception)
         {
             _logger.LogError(exception, exception.Message);

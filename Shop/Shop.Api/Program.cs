@@ -4,9 +4,13 @@ using Common.Application.FileUtil.Interfaces;
 using Common.Application.FileUtil.Services;
 using Common.AspNetCore;
 using Common.AspNetCore.Middlewares;
+using Common.Domain.Exceptions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using Shop.Api.Infrastructure;
 using Shop.Api.Infrastructure.JwtUtil;
 using Shop.Config;
@@ -28,9 +32,33 @@ builder.Services.AddControllers()
                     Message = ModelStateUtil.GetModelStateErrors(context.ModelState)
                 }
             };
-            return new BadRequestObjectResult(result);
+            var json = JsonConvert.SerializeObject(result);
+            throw new BadRequestException(JoinErrors(context.ModelState));
         });
     });
+string JoinErrors(ModelStateDictionary modelState)
+{
+    var errors = new Dictionary<string, List<string>>();
+
+    if (!modelState.IsValid)
+    {
+        if (modelState.ErrorCount > 0)
+        {
+            for (int i = 0; i < modelState.Values.Count(); i++)
+            {
+                var key = modelState.Keys.ElementAt(i);
+                var value = modelState.Values.ElementAt(i);
+
+                if (value.ValidationState == ModelValidationState.Invalid)
+                {
+                    errors.Add(key, value.Errors.Select(x => string.IsNullOrEmpty(x.ErrorMessage) ? x.Exception?.Message : x.ErrorMessage).ToList());
+                }
+            }
+        }
+    }
+    var error = string.Join(" ", errors.Select(x => $"{string.Join(" - ", x.Value)}"));
+    return error;
+}
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
