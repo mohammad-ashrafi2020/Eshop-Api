@@ -49,6 +49,10 @@ public class AuthController : ApiController
         }
 
         var loginResult = await AddTokenAndGenerateJwt(user);
+        if (user.Roles.Any(f => f.RoleTitle == "ادمین"))
+        {
+            loginResult.Data!.IsAdmin = true;
+        }
         return CommandResult(loginResult);
     }
 
