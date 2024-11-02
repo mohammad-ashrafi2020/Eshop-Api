@@ -133,8 +133,11 @@ namespace Shop.Domain.UserAgg
         public void AddToken(string hashJwtToken, string hashRefreshToken, DateTime tokenExpireDate, DateTime refreshTokenExpireDate, string device)
         {
             var activeTokenCount = Tokens.Count(c => c.RefreshTokenExpireDate > DateTime.Now);
-            if (activeTokenCount == 3)
-                throw new InvalidDomainDataException("امکان استفاده از 4 دستگاه همزمان وجود ندارد");
+
+            //حذف این شرط برای کاربر ادمین که توی Api بچه های دوره بتونن تست کنن
+            if (PhoneNumber != "09351171196")
+                if (activeTokenCount == 3)
+                    throw new InvalidDomainDataException("امکان استفاده از 4 دستگاه همزمان وجود ندارد");
 
             var token = new UserToken(hashJwtToken, hashRefreshToken, tokenExpireDate, refreshTokenExpireDate, device);
             token.UserId = Id;
