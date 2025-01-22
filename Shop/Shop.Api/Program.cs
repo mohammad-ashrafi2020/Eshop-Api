@@ -23,42 +23,20 @@ builder.Services.AddControllers()
     {
         option.InvalidModelStateResponseFactory = (context =>
         {
-            var result = new ApiResult()
+            var result = new
             {
-                IsSuccess = false,
-                MetaData = new()
+                isSuccess = false,
+                metaData = new
                 {
-                    AppStatusCode = AppStatusCode.BadRequest,
-                    Message = ModelStateUtil.GetModelStateErrors(context.ModelState)
+                    appStatusCode = AppStatusCode.BadRequest,
+                    message = ModelStateUtil.GetModelStateErrors(context.ModelState)
                 }
             };
+
             var json = JsonConvert.SerializeObject(result);
-            throw new BadRequestException(JoinErrors(context.ModelState));
+            return new BadRequestObjectResult(result);
         });
     });
-string JoinErrors(ModelStateDictionary modelState)
-{
-    var errors = new Dictionary<string, List<string>>();
-
-    if (!modelState.IsValid)
-    {
-        if (modelState.ErrorCount > 0)
-        {
-            for (int i = 0; i < modelState.Values.Count(); i++)
-            {
-                var key = modelState.Keys.ElementAt(i);
-                var value = modelState.Values.ElementAt(i);
-
-                if (value.ValidationState == ModelValidationState.Invalid)
-                {
-                    errors.Add(key, value.Errors.Select(x => string.IsNullOrEmpty(x.ErrorMessage) ? x.Exception?.Message : x.ErrorMessage).ToList());
-                }
-            }
-        }
-    }
-    var error = string.Join(" ", errors.Select(x => $"{string.Join(" - ", x.Value)}"));
-    return error;
-}
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>

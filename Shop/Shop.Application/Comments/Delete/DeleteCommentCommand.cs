@@ -18,8 +18,10 @@ public class DeleteCommentCommandHandler : IBaseCommandHandler<DeleteCommentComm
     public async Task<OperationResult> Handle(DeleteCommentCommand request, CancellationToken cancellationToken)
     {
         var comment = await _repository.GetTracking(request.CommentId);
-        if(comment == null || comment.UserId!=request.UserId)
-            return OperationResult.NotFound();
+
+        //Comment For Course For Admin Panel
+        //if(comment == null || comment.UserId!=request.UserId)
+        //    return OperationResult.NotFound();
 
         await _repository.DeleteAndSave(comment);
         return OperationResult.Success();
